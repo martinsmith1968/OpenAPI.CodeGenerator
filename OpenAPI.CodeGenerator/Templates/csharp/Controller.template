@@ -1,6 +1,0 @@
-﻿namespace MyStuff.Crap
-{
-	public {{ Name }}Controller : BaseController
-	{
-	}
-}

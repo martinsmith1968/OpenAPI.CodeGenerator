@@ -1,19 +1,20 @@
 ﻿using System;
 using OpenAPI.CodeGenerator.Arguments;
+using OpenAPI.CodeGenerator.TemplateProviders.Implementation;
 
 namespace OpenAPI.CodeGenerator.TemplateProviders
 {
     public static class TemplateProviderFactory
     {
-        public static ITemplateProvider GetTemplateProvider(TemplateProviderType templateProviderType, string language)
+        public static ITemplateProvider GetTemplateProvider(TemplateProviderType templateProviderType, string renderEngineName, string language)
         {
             switch (templateProviderType)
             {
                 case TemplateProviderType.FileSystem:
-                    return new FileSystemTemplateProvider(language);
+                    return new FileSystemTemplateProvider(renderEngineName, language);
 
                 case TemplateProviderType.Resource:
-                    return new ResourceTemplateProvider(language);
+                    return new ResourceTemplateProvider(renderEngineName, language);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(templateProviderType), $"Invalid or unsupported {nameof(TemplateProviderType)}: {templateProviderType.ToString()}");

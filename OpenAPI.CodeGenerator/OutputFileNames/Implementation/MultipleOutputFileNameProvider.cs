@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using OpenAPI.CodeGenerator.Templates;
 
-namespace OpenAPI.CodeGenerator.OutputFileNames
+namespace OpenAPI.CodeGenerator.OutputFileNames.Implementation
 {
     public class MultipleOutputFileNameProvider : IOutputFileNameProvider
     {

@@ -24,7 +24,7 @@ namespace OpenAPI.CodeGenerator
             Arguments          = arguments;
             Document           = OpenApiDocumentFactory.ReadDocumentFromFile(arguments.OpenApiDocumentFileName);
             RenderEngine       = RenderEngineFactory.GetRenderer(arguments.RenderEngine);
-            TemplateProvider   = TemplateProviderFactory.GetTemplateProvider(arguments.TemplateProvider, arguments.Language);
+            TemplateProvider   = TemplateProviderFactory.GetTemplateProvider(arguments.TemplateProvider, RenderEngine.Name, arguments.Language);
             OutputFileProvider = OutputFileNameProviderFactory.GetOutputFileProvider(arguments.OutputType, arguments.OutputPath);
         }
 
@@ -37,6 +37,8 @@ namespace OpenAPI.CodeGenerator
 
         public void GenerateOutputFiles()
         {
+            RenderEngine.Initialise(Arguments.TemplateProvider, TemplateProvider);
+
             foreach (var path in Document.Paths)
             {
                 GeneratePath(path.Key, path.Value);

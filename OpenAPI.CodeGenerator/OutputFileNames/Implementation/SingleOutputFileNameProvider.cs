@@ -1,6 +1,6 @@
 ﻿using OpenAPI.CodeGenerator.Templates;
 
-namespace OpenAPI.CodeGenerator.OutputFileNames
+namespace OpenAPI.CodeGenerator.OutputFileNames.Implementation
 {
     public class SingleOutputFileNameProvider : IOutputFileNameProvider
     {

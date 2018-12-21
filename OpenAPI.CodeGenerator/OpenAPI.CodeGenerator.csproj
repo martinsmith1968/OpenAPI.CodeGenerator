@@ -59,17 +59,19 @@
     <Compile Include="OpenAPI\OpenApiDocumentFactory.cs" />
     <Compile Include="OutputFileNames\IOutputFileNameProvider.cs" />
     <Compile Include="OutputFileNames\OutputFileNameProviderFactory.cs" />
-    <Compile Include="OutputFileNames\MultipleOutputFileNameProvider.cs" />
-    <Compile Include="OutputFileNames\SingleOutputFileNameProvider.cs" />
+    <Compile Include="OutputFileNames\Implementation\MultipleOutputFileNameProvider.cs" />
+    <Compile Include="OutputFileNames\Implementation\SingleOutputFileNameProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\FileSystemProviders\FileSystemProviderFactory.cs" />
+    <Compile Include="Renderers\Implementation\DotLiquidExtensions.cs" />
     <Compile Include="Renderers\Implementation\DotLiquidRenderEngine.cs" />
     <Compile Include="Renderers\IRenderEngine.cs" />
     <Compile Include="Renderers\RenderEngineFactory.cs" />
     <Compile Include="Arguments\RenderEngineType.cs" />
-    <Compile Include="TemplateProviders\FileSystemTemplateProvider.cs" />
+    <Compile Include="TemplateProviders\Implementation\FileSystemTemplateProvider.cs" />
     <Compile Include="TemplateProviders\ITemplateProvider.cs" />
-    <Compile Include="TemplateProviders\ResourceTemplateProvider.cs" />
+    <Compile Include="TemplateProviders\Implementation\ResourceTemplateProvider.cs" />
     <Compile Include="TemplateProviders\TemplateProviderFactory.cs" />
     <Compile Include="Arguments\TemplateProviderType.cs" />
     <Compile Include="Templates\TemplateItemType.cs" />
@@ -77,9 +79,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="Templates\csharp\Controller.template">
+    <EmbeddedResource Include="Templates\DotLiquid\csharp\Controller.template">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Templates\DotLiquid\csharp\Action.template" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using OpenAPI.CodeGenerator.Templates;
 
-namespace OpenAPI.CodeGenerator.TemplateProviders
+namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
 {
     public class ResourceTemplateProvider : ITemplateProvider
     {
@@ -14,16 +14,14 @@ namespace OpenAPI.CodeGenerator.TemplateProviders
         public string BaseFolder { get; }
         public string FileExtension { get; }
 
-        public ResourceTemplateProvider(string languageFolder)
-            : this(languageFolder, DefaultResourceTemplateFolder, DefaultResourceTemplateExtension)
+        public ResourceTemplateProvider(string renderEngineName, string languageFolder)
+            : this(renderEngineName, languageFolder, DefaultResourceTemplateFolder, DefaultResourceTemplateExtension)
         {
         }
 
-        public ResourceTemplateProvider(string languageFolder, string baseFolder, string fileExtension)
+        public ResourceTemplateProvider(string renderEngineName, string languageFolder, string baseFolder, string fileExtension)
         {
-            BaseFolder = string.IsNullOrEmpty(languageFolder)
-                ? baseFolder
-                : string.Concat(baseFolder, ".", languageFolder);
+            BaseFolder = string.Concat(baseFolder, ".", renderEngineName, ".", languageFolder);
             FileExtension = fileExtension;
         }
 
