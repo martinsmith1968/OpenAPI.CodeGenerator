@@ -1,5 +1,5 @@
 ﻿using DotLiquid;
-using OpenAPI.CodeGenerator.Arguments;
+using OpenAPI.CodeGenerator.Configuration;
 using OpenAPI.CodeGenerator.Renderers.FileSystemProviders;
 using OpenAPI.CodeGenerator.TemplateProviders;
 

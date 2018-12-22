@@ -53,8 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="Arguments\Arguments.cs" />
-    <Compile Include="Arguments\OutputType.cs" />
+    <Compile Include="Configuration\Arguments.cs" />
+    <Compile Include="Configuration\CommandType.cs" />
+    <Compile Include="Configuration\LanguageType.cs" />
+    <Compile Include="Configuration\OutputType.cs" />
     <Compile Include="OpenAPI\Items\Controller.cs" />
     <Compile Include="OpenAPI\OpenApiDocumentFactory.cs" />
     <Compile Include="OutputFileNames\IOutputFileNameProvider.cs" />
@@ -68,12 +70,12 @@
     <Compile Include="Renderers\Implementation\DotLiquidRenderEngine.cs" />
     <Compile Include="Renderers\IRenderEngine.cs" />
     <Compile Include="Renderers\RenderEngineFactory.cs" />
-    <Compile Include="Arguments\RenderEngineType.cs" />
+    <Compile Include="Configuration\RenderEngineType.cs" />
     <Compile Include="TemplateProviders\Implementation\FileSystemTemplateProvider.cs" />
     <Compile Include="TemplateProviders\ITemplateProvider.cs" />
     <Compile Include="TemplateProviders\Implementation\ResourceTemplateProvider.cs" />
     <Compile Include="TemplateProviders\TemplateProviderFactory.cs" />
-    <Compile Include="Arguments\TemplateProviderType.cs" />
+    <Compile Include="Configuration\TemplateProviderType.cs" />
     <Compile Include="Templates\TemplateItemType.cs" />
   </ItemGroup>
   <ItemGroup>

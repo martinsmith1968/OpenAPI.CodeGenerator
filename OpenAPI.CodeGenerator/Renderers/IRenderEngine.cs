@@ -1,4 +1,4 @@
-﻿using OpenAPI.CodeGenerator.Arguments;
+﻿using OpenAPI.CodeGenerator.Configuration;
 using OpenAPI.CodeGenerator.TemplateProviders;
 
 namespace OpenAPI.CodeGenerator.Renderers

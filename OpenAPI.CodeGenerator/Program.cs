@@ -1,12 +1,13 @@
 ﻿using System;
 using Ookii.CommandLine;
+using OpenAPI.CodeGenerator.Configuration;
 
 namespace OpenAPI.CodeGenerator
 {
     internal class Program
     {
         protected internal static CommandLineParser Parser;
-        protected internal static Arguments.Arguments Arguments;
+        protected internal static Arguments Arguments;
 
         protected internal static bool CanShowHelp => Parser != null && Arguments != null;
         protected internal static bool IsHelpRequested => Arguments != null && Arguments.Help;
@@ -15,8 +16,8 @@ namespace OpenAPI.CodeGenerator
         {
             try
             {
-                Parser = new CommandLineParser(typeof(Arguments.Arguments));
-                Arguments = (Arguments.Arguments)Parser.Parse(args);
+                Parser = new CommandLineParser(typeof(Arguments));
+                Arguments = (Arguments)Parser.Parse(args);
 
                 if (CanShowHelp && IsHelpRequested)
                 {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using DotLiquid.FileSystems;
-using OpenAPI.CodeGenerator.Arguments;
+using OpenAPI.CodeGenerator.Configuration;
 
 namespace OpenAPI.CodeGenerator.Renderers.FileSystemProviders
 {

@@ -1,6 +1,6 @@
 ﻿using Ookii.CommandLine;
 
-namespace OpenAPI.CodeGenerator.Arguments
+namespace OpenAPI.CodeGenerator.Configuration
 {
     public class Arguments
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenAPI.CodeGenerator.Arguments;
+using OpenAPI.CodeGenerator.Configuration;
 using OpenAPI.CodeGenerator.Renderers.Implementation;
 
 namespace OpenAPI.CodeGenerator.Renderers

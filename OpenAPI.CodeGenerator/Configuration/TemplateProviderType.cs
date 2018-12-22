@@ -1,4 +1,4 @@
-﻿namespace OpenAPI.CodeGenerator.Arguments
+﻿namespace OpenAPI.CodeGenerator.Configuration
 {
     public enum TemplateProviderType
     {

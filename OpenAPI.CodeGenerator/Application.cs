@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.OpenApi.Models;
+using OpenAPI.CodeGenerator.Configuration;
 using OpenAPI.CodeGenerator.OpenAPI;
 using OpenAPI.CodeGenerator.OpenAPI.Items;
 using OpenAPI.CodeGenerator.OutputFileNames;
@@ -17,9 +18,9 @@ namespace OpenAPI.CodeGenerator
         protected internal readonly ITemplateProvider TemplateProvider;
         protected internal readonly IOutputFileNameProvider OutputFileProvider;
 
-        public Arguments.Arguments Arguments { get; }
+        public Arguments Arguments { get; }
 
-        public Application(Arguments.Arguments arguments)
+        public Application(Arguments arguments)
         {
             Arguments          = arguments;
             Document           = OpenApiDocumentFactory.ReadDocumentFromFile(arguments.OpenApiDocumentFileName);
