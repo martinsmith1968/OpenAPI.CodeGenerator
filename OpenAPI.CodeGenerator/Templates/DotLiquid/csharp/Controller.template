@@ -1,9 +1,0 @@
-﻿namespace MyStuff.Crap
-{
-	public {{ Name }}Controller : BaseController
-	{
-		{% for operation in ToHash(OpenApiPathItem.Operations) -%}
-		{% include "Action.template" %}
-		{% endfor -%}
-	}
-}

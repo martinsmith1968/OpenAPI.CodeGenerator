@@ -2,45 +2,59 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using OpenAPI.CodeGenerator.Templates;
+using OpenAPI.CodeGenerator.Common.Interfaces;
+using OpenAPI.CodeGenerator.Common.Types;
 
 namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
 {
     public class FileSystemTemplateProvider : ITemplateProvider
     {
         public static string DefaultFileSystemTemplateFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Templates");
-        public static string DefaultFileSystemTemplateExtension = "template";
 
-        public string BaseFolder { get; }
-        public string FileExtension { get; }
+        public string BaseLocation { get; }
 
-        public FileSystemTemplateProvider(string renderEngineName, string languageFolder)
-            :this(renderEngineName, languageFolder, DefaultFileSystemTemplateFolder, DefaultFileSystemTemplateExtension)
+        public FileSystemTemplateProvider()
+            :this(DefaultFileSystemTemplateFolder)
         {
         }
 
-        public FileSystemTemplateProvider(string renderEngineName, string languageFolder, string baseFolder, string fileExtension)
+        public FileSystemTemplateProvider(string baseFolder)
         {
-            BaseFolder = Path.Combine(baseFolder, renderEngineName, languageFolder);
-            FileExtension = fileExtension;
+            BaseLocation = baseFolder;
         }
 
-        public IList<string> GetInstalledLanguages()
+        public IList<string> GetAvailableLanguages()
         {
-            var paths = Directory.Exists(BaseFolder)
-                ? Directory.GetDirectories(BaseFolder)
+            var paths = Directory.Exists(BaseLocation)
+                ? Directory.GetDirectories(BaseLocation)
                 : Enumerable.Empty<string>().ToArray();
 
             return paths;
         }
 
-        public string GetTemplate(TemplateItemType templateItemType)
+        public string GetTemplatePath(IRenderEngine renderEngine, string language)
         {
-            var fileName = Path.Combine(BaseFolder, string.Concat(templateItemType, ".", FileExtension));
+            var path = Path.Combine(BaseLocation, language, renderEngine.Name);
+
+            return path;
+        }
+
+        public string GetTemplate(IRenderEngine renderEngine, string language, TemplateItemType templateItemType)
+        {
+            var fileName = Path.Combine(GetTemplatePath(renderEngine, language), string.Concat(templateItemType, ".", renderEngine.FileExtension));
+            if (!DoesTemplateExist(fileName))
+            {
+                fileName = Path.Combine(GetTemplatePath(renderEngine, language), string.Concat("_", templateItemType, ".", renderEngine.FileExtension));
+            }
 
             return File.Exists(fileName)
                 ? File.ReadAllText(fileName)
                 : null;
+        }
+
+        public bool DoesTemplateExist(string fullTemplateName)
+        {
+            return File.Exists(fullTemplateName);
         }
     }
 }

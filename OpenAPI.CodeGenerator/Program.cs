@@ -1,55 +1,45 @@
 ﻿using System;
+using System.Linq;
 using Ookii.CommandLine;
-using OpenAPI.CodeGenerator.Configuration;
+using OpenAPI.CodeGenerator.Commands;
+using OpenAPI.CodeGenerator.Parser;
 
 namespace OpenAPI.CodeGenerator
 {
     internal class Program
     {
-        protected internal static CommandLineParser Parser;
-        protected internal static Arguments Arguments;
-
-        protected internal static bool CanShowHelp => Parser != null && Arguments != null;
-        protected internal static bool IsHelpRequested => Arguments != null && Arguments.Help;
+        private static ProgramArguments _programArguments;
+        private static CommandLineParser _parser;
 
         private static int Main(string[] args)
         {
             try
             {
-                Parser = new CommandLineParser(typeof(Arguments));
-                Arguments = (Arguments)Parser.Parse(args);
+                var programArgs = (args ?? Enumerable.Empty<string>()).Take(1).ToArray();
 
-                if (CanShowHelp && IsHelpRequested)
+                _programArguments = programArgs.ParseArguments<ProgramArguments>(out _parser);
+                if (!_parser.IsValid(_programArguments))
                 {
-                    ShowHelp();
+                    throw new CommandLineArgumentException("Unable to parsr arguments", CommandLineArgumentErrorCategory.Unspecified);
+                }
+
+                if (_programArguments.Help)
+                {
+                    _parser.ShowHelpToConsole();
                     return 1;
                 }
 
-                Arguments.Validate();
+                var command = CommandFactory.GetCommand(_programArguments.Command, args.Skip(1).ToArray());
 
-                var application = new Application(Arguments);
-
-                if (Arguments.ListInstalledLanguages)
-                {
-                    var languages = application.GetInstalledLanguages();
-
-                    Console.WriteLine("Languages:");
-                    foreach(var language in languages)
-                        Console.WriteLine($"  {language}");
-                }
-                else
-                {
-                    application.GenerateOutputFiles();
-
-                }
+                command.Execute();
 
                 return 0;
             }
             catch (CommandLineArgumentException e)
             {
-                if (CanShowHelp && IsHelpRequested)
+                if (_parser.IsValid(_programArguments) && _programArguments.Help)
                 {
-                    ShowHelp();
+                    _parser.ShowHelpToConsole();
                     return 2;
                 }
 
@@ -63,17 +53,17 @@ namespace OpenAPI.CodeGenerator
 
                 return 4;
             }
-        }
-
-        private static void ShowHelp()
-        {
-            if (Arguments != null && Arguments.Help)
+            finally
             {
-                var options = new WriteUsageOptions()
+                if (System.Diagnostics.Debugger.IsAttached)
                 {
-                };
+                    while (Console.KeyAvailable)
+                        Console.ReadKey(true);
 
-                Parser.WriteUsageToConsole(options);
+                    Console.Write("Press any key to exit...");
+                    Console.ReadKey(true);
+                    Console.WriteLine();
+                }
             }
         }
     }

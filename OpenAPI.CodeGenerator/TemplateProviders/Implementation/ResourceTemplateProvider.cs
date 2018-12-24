@@ -2,38 +2,30 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using OpenAPI.CodeGenerator.Templates;
+using OpenAPI.CodeGenerator.Common.Interfaces;
+using OpenAPI.CodeGenerator.Common.Types;
 
 namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
 {
     public class ResourceTemplateProvider : ITemplateProvider
     {
         public static string DefaultResourceTemplateFolder = string.Concat(typeof(Program).Namespace, ".", "Templates");
-        public static string DefaultResourceTemplateExtension = "template";
+        private readonly Assembly _templateAssembly;
 
-        public string BaseFolder { get; }
-        public string FileExtension { get; }
+        public string BaseLocation => DefaultResourceTemplateFolder;
 
-        public ResourceTemplateProvider(string renderEngineName, string languageFolder)
-            : this(renderEngineName, languageFolder, DefaultResourceTemplateFolder, DefaultResourceTemplateExtension)
+        public ResourceTemplateProvider()
         {
+            _templateAssembly = Assembly.GetEntryAssembly();
         }
 
-        public ResourceTemplateProvider(string renderEngineName, string languageFolder, string baseFolder, string fileExtension)
+        public IList<string> GetAvailableLanguages()
         {
-            BaseFolder = string.Concat(baseFolder, ".", renderEngineName, ".", languageFolder);
-            FileExtension = fileExtension;
-        }
-
-        public IList<string> GetInstalledLanguages()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-
-            var resources = assembly.GetManifestResourceNames()
-                    .Where(x => x.StartsWith(BaseFolder));
+            var resources = _templateAssembly.GetManifestResourceNames()
+                    .Where(x => x.StartsWith(BaseLocation));
 
             var paths = resources
-                .Select(x => x.Remove(0, BaseFolder.Length + 1))
+                .Select(x => x.Remove(0, BaseLocation.Length + 1))
                 .Select(x => x.Split(".".ToCharArray()).FirstOrDefault())
                 .Where(x => !string.IsNullOrEmpty(x))
                 .Distinct()
@@ -42,14 +34,28 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
             return paths;
         }
 
-        public string GetTemplate(TemplateItemType templateItemType)
+        public string GetTemplatePath(IRenderEngine renderEngine, string language)
         {
-            var resourceName = string.Concat(BaseFolder, ".", templateItemType, ".", FileExtension);
+            var path = Combine(BaseLocation, language, renderEngine.Name);
 
-            var assembly = Assembly.GetExecutingAssembly();
+            return path;
+        }
 
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
+        public string GetTemplate(IRenderEngine renderEngine, string language, TemplateItemType templateItemType)
+        {
+            var resourceName = Combine(GetTemplatePath(renderEngine, language), templateItemType.ToString(), renderEngine.FileExtension);
+            if (!DoesTemplateExist(resourceName))
             {
+                resourceName = Combine(GetTemplatePath(renderEngine, language), string.Concat("_",  templateItemType.ToString()), renderEngine.FileExtension);
+            }
+
+            using (var stream = _templateAssembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                {
+                    return null;
+                }
+
                 using (var reader = new StreamReader(stream))
                 {
                     var result = reader.ReadToEnd();
@@ -57,6 +63,19 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
                     return result;
                 }
             }
+        }
+
+        public bool DoesTemplateExist(string fullTemplateName)
+        {
+            using (var stream = _templateAssembly.GetManifestResourceStream(fullTemplateName))
+            {
+                return stream != null;
+            }
+        }
+
+        private static string Combine(params string[] paths)
+        {
+            return string.Join(".", paths);
         }
     }
 }

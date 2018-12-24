@@ -1,0 +1,9 @@
+﻿namespace MyStuff.Crap
+{
+	public {{ Name }}Controller : BaseController
+	{
+		{% for operation in OpenApiPathItem.Operations -%}
+		{% include "Action" %}
+		{% endfor -%}
+	}
+}

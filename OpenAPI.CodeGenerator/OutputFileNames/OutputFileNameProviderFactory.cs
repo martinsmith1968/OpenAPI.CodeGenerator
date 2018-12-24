@@ -1,5 +1,6 @@
 ﻿using System;
-using OpenAPI.CodeGenerator.Configuration;
+using OpenAPI.CodeGenerator.Common.Interfaces;
+using OpenAPI.CodeGenerator.Common.Types;
 using OpenAPI.CodeGenerator.OutputFileNames.Implementation;
 
 namespace OpenAPI.CodeGenerator.OutputFileNames

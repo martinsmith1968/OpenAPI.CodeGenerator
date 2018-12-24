@@ -1,5 +1,6 @@
 ﻿using System.IO;
-using OpenAPI.CodeGenerator.Templates;
+using OpenAPI.CodeGenerator.Common.Interfaces;
+using OpenAPI.CodeGenerator.Common.Types;
 
 namespace OpenAPI.CodeGenerator.OutputFileNames.Implementation
 {
