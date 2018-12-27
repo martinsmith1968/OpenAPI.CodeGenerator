@@ -2,6 +2,14 @@
 {
     public enum TemplateItemType
     {
-        Controller
+        Definition = 1,
+
+        Interface,
+
+        Controller,
+
+        Action,
+
+        Model
     }
 }

@@ -9,7 +9,7 @@ namespace OpenAPI.CodeGenerator.Common.Interfaces
 
         string FileExtension { get; }
 
-        void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, string language);
+        void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, string languageFolder);
 
         void RegisterType(Type type);
 

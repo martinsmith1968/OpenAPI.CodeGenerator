@@ -4,8 +4,13 @@
     {
         DotLiquid,
 
-        LiquidNET,
+        // Fails to parse OpenApiDocument.ToLiquid() - suspect because of recursive properties
+        //LiquidNET,
 
-        Fluid
+        Fluid,
+
+        Scriban,
+
+        Razor
     }
 }

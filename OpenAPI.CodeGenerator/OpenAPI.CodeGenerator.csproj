@@ -6,12 +6,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Templates\csharp\Fluid\Controller.liquid" />
+    <None Remove="Templates\csharp\Fluid\_Action.liquid" />
+    <None Remove="Templates\csharp\Scriban\Controller.liquid" />
+    <None Remove="Templates\csharp\Scriban\_Action.liquid" />
+    <None Remove="Templates\csv\Fluid\Definition.liquid" />
+    <None Remove="Templates\csv\DotLiquid\Definition.liquid" />
+    <None Remove="Templates\csv\Razor\Definition.cshtml" />
+    <None Remove="Templates\csv\Scriban\Definition.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Templates\csharp\DotLiquid\Controller.liquid">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Templates\csharp\DotLiquid\_Action.liquid" />
+    <EmbeddedResource Include="Templates\csharp\Fluid\Controller.liquid">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\csharp\Fluid\_Action.liquid" />
     <EmbeddedResource Include="Templates\csharp\LiquidNET\Controller.template" />
     <EmbeddedResource Include="Templates\csharp\LiquidNET\_Action.template" />
+    <EmbeddedResource Include="Templates\csharp\Scriban\Controller.liquid">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\csharp\Scriban\_Action.liquid" />
+    <EmbeddedResource Include="Templates\csv\Fluid\Definition.liquid" />
+    <EmbeddedResource Include="Templates\csv\DotLiquid\Definition.liquid" />
+    <EmbeddedResource Include="Templates\csv\Razor\Definition.cshtml" />
+    <EmbeddedResource Include="Templates\csv\Scriban\Definition.liquid" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,9 +47,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenAPI.CodeGenerator.Common\OpenAPI.CodeGenerator.Common.csproj" />
-    <ProjectReference Include="..\OpenAPI.CodeGenerator.DotLiquidRenderer\OpenAPI.CodeGenerator.DotLiquidRenderer.csproj" />
-    <ProjectReference Include="..\OpenAPI.CodeGenerator.Fluid\OpenAPI.CodeGenerator.Fluid.csproj" />
-    <ProjectReference Include="..\OpenAPI.CodeGenerator.LiquidNETRenderer\OpenAPI.CodeGenerator.LiquidNETRenderer.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.DotLiquid\OpenAPI.CodeGenerator.Renderer.DotLiquid.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.Fluid\OpenAPI.CodeGenerator.Renderer.Fluid.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.LiquidNET\OpenAPI.CodeGenerator.Renderer.LiquidNET.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.Razor\OpenAPI.CodeGenerator.Renderer.Razor.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.Scriban\OpenAPI.CodeGenerator.Renderer.Scriban.csproj" />
   </ItemGroup>
 
 </Project>

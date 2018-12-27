@@ -5,5 +5,9 @@
         Generate = 1,
 
         ListTemplates,
+
+        ListRengerEngines,
+
+        ExportEmbeddedTemplates
     }
 }

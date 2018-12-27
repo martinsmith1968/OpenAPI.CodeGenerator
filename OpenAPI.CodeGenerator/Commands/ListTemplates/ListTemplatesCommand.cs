@@ -32,7 +32,9 @@ namespace OpenAPI.CodeGenerator.Commands.ListTemplates
 
             Console.WriteLine("Languages:");
             foreach (var language in languages)
+            {
                 Console.WriteLine($"  {language}");
+            }
         }
     }
 }

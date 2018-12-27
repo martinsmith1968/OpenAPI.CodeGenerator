@@ -1,0 +1,4 @@
+﻿FileName,BestControllerName,Host,BasePath,FileTagName,FileTagDescription,Path,Action,ActionTagName,ActionTagDescription
+{% for pathitem in definition.OpenApiDocument.Paths %}
+P: {{ pathitem }}
+{% endfor %}

@@ -11,8 +11,15 @@ namespace OpenAPI.CodeGenerator.Parser
 
             var arguments = (T)parser.Parse(args);
 
+            var helpRequested = (arguments is IHelpArguments helpArguments) && helpArguments.Help;
+
             if (arguments is IValidatableArguments validatableArguments)
-                validatableArguments.Validate();
+            {
+                if (!helpRequested)
+                {
+                    validatableArguments.Validate();
+                }
+            }
 
             return arguments;
         }

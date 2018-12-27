@@ -41,12 +41,12 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
             return path;
         }
 
-        public string GetTemplate(IRenderEngine renderEngine, string language, TemplateItemType templateItemType)
+        public string GetTemplate(IRenderEngine renderEngine, string languageFolder, TemplateItemType templateItemType)
         {
-            var resourceName = Combine(GetTemplatePath(renderEngine, language), templateItemType.ToString(), renderEngine.FileExtension);
+            var resourceName = Combine(GetTemplatePath(renderEngine, languageFolder), templateItemType.ToString(), renderEngine.FileExtension);
             if (!DoesTemplateExist(resourceName))
             {
-                resourceName = Combine(GetTemplatePath(renderEngine, language), string.Concat("_",  templateItemType.ToString()), renderEngine.FileExtension);
+                resourceName = Combine(GetTemplatePath(renderEngine, languageFolder), string.Concat("_",  templateItemType.ToString()), renderEngine.FileExtension);
             }
 
             using (var stream = _templateAssembly.GetManifestResourceStream(resourceName))

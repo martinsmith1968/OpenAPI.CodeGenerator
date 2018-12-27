@@ -20,7 +20,7 @@ namespace OpenAPI.CodeGenerator
                 _programArguments = programArgs.ParseArguments<ProgramArguments>(out _parser);
                 if (!_parser.IsValid(_programArguments))
                 {
-                    throw new CommandLineArgumentException("Unable to parsr arguments", CommandLineArgumentErrorCategory.Unspecified);
+                    throw new CommandLineArgumentException("Unable to parse arguments", CommandLineArgumentErrorCategory.Unspecified);
                 }
 
                 if (_programArguments.Help)
@@ -43,7 +43,7 @@ namespace OpenAPI.CodeGenerator
                     return 2;
                 }
 
-                Console.Error.WriteLine($"{e.GetType().Name} Error: {e.Message}");
+                Console.Error.WriteLine($"Error: {e.Message}");
 
                 return 3;
             }

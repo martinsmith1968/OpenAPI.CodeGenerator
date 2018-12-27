@@ -8,7 +8,7 @@ namespace OpenAPI.CodeGenerator.OpenAPI.Extensions
     {
         public static IList<OpenApiServer> GetServers(this OpenApiDocument document)
         {
-            var servers = (document?.Servers ?? Enumerable.Empty<OpenApiServer>()).ToList();
+             var servers = (document?.Servers ?? Enumerable.Empty<OpenApiServer>()).ToList();
 
             return servers;
         }

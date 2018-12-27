@@ -4,4 +4,10 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="DNX.Helpers">
+      <HintPath>C:\Users\Martin Smith\.nuget\packages\dnx.helpers\1.0.26\lib\net452\DNX.Helpers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

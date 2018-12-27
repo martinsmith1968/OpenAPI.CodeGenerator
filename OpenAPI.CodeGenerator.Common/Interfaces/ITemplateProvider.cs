@@ -11,7 +11,7 @@ namespace OpenAPI.CodeGenerator.Common.Interfaces
 
         string GetTemplatePath(IRenderEngine renderEngine, string language);
 
-        string GetTemplate(IRenderEngine renderEngine, string language, TemplateItemType templateItemType);
+        string GetTemplate(IRenderEngine renderEngine, string languageFolder, TemplateItemType templateItemType);
 
         bool DoesTemplateExist(string fullTemplateName);
     }

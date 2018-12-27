@@ -1,0 +1,31 @@
+﻿@using System.Linq
+@using OpenAPI.CodeGenerator.Extensions
+@model OpenAPI.CodeGenerator.OpenAPI.Items.APIDefinition
+GroupName,FileName,BestControllerName,Host,BasePath,FileTagNames,FileTagDescriptions,Path,Action,OperationId,ActionTagNames,ActionTagDescriptions,ActionSummary,ActionDescription
+    @foreach (var pathItem in Model.OpenApiDocument.Paths)
+    {
+        foreach (var operationItem in pathItem.Value.Operations)
+        {
+            var values = new string[]
+            {
+                Model.GroupName,
+                Model.FileName,
+                Model.Name,
+                Model.Host,
+                Model.BasePath,
+                string.Join("|", Model.OpenApiDocument.Tags.SelectOrDefault(tags => tags.Name)),
+                string.Join("|", Model.OpenApiDocument.Tags.SelectOrDefault(tags => tags.Description)),
+                pathItem.Key,
+                operationItem.Key.ToString(),
+                operationItem.Value.OperationId,
+                string.Join("|", operationItem.Value.Tags.SelectOrDefault(tags => tags.Name)),
+                string.Join("|", operationItem.Value.Tags.SelectOrDefault(tags => tags.Description)),
+                operationItem.Value.Summary,
+                operationItem.Value.Description
+            };
+
+            var line = string.Join(",", values);
+
+<text>@line</text>
+        }
+    }

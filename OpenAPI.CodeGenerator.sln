@@ -3,17 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAPI.CodeGenerator.DotLiquidRenderer", "OpenAPI.CodeGenerator.DotLiquidRenderer\OpenAPI.CodeGenerator.DotLiquidRenderer.csproj", "{F36B5D21-1BC3-4F98-9EA1-A741A6E729F1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAPI.CodeGenerator", "OpenAPI.CodeGenerator\OpenAPI.CodeGenerator.csproj", "{EE63261F-7C6C-435D-8442-63B69B8FF8F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAPI.CodeGenerator.Common", "OpenAPI.CodeGenerator.Common\OpenAPI.CodeGenerator.Common.csproj", "{1227FD7D-B017-4D11-8B01-38A8A23A2E73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAPI.CodeGenerator.Common", "OpenAPI.CodeGenerator.Common\OpenAPI.CodeGenerator.Common.csproj", "{1227FD7D-B017-4D11-8B01-38A8A23A2E73}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{20BC934D-605C-4BBA-A620-F50A4B5264E6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{ACD22724-337D-4DC5-85B3-0555A64935D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAPI.CodeGenerator.LiquidNETRenderer", "OpenAPI.CodeGenerator.LiquidNETRenderer\OpenAPI.CodeGenerator.LiquidNETRenderer.csproj", "{89E59D11-59F5-44BC-8ED1-B54DAF38642A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{A88966AB-3D3E-45D0-8E3F-11775B64BC71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAPI.CodeGenerator.Fluid", "OpenAPI.CodeGenerator.Fluid\OpenAPI.CodeGenerator.Fluid.csproj", "{60C7577B-763B-435C-AD79-F265EB50B4C1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RenderEngines", "RenderEngines", "{1BC6F92F-5254-40F8-A090-A84039C3FC85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAPI.CodeGenerator.Renderer.DotLiquid", "OpenAPI.CodeGenerator.Renderer.DotLiquid\OpenAPI.CodeGenerator.Renderer.DotLiquid.csproj", "{0A7BC279-BBB0-474A-AEA6-BF6F90882CF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAPI.CodeGenerator.Renderer.LiquidNET", "OpenAPI.CodeGenerator.Renderer.LiquidNET\OpenAPI.CodeGenerator.Renderer.LiquidNET.csproj", "{11B058AA-15C7-4D6B-A3D5-D939F948C62A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAPI.CodeGenerator.Renderer.Fluid", "OpenAPI.CodeGenerator.Renderer.Fluid\OpenAPI.CodeGenerator.Renderer.Fluid.csproj", "{1D91D738-1375-4845-8EBA-8C41140F3EA8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAPI.CodeGenerator.Renderer.Scriban", "OpenAPI.CodeGenerator.Renderer.Scriban\OpenAPI.CodeGenerator.Renderer.Scriban.csproj", "{F72A461D-067A-40CD-BEBB-FC52E42B1657}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAPI.CodeGenerator.Renderer.Razor", "OpenAPI.CodeGenerator.Renderer.Razor\OpenAPI.CodeGenerator.Renderer.Razor.csproj", "{AB26C5E3-649A-4E2E-B55E-0F6495577398}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Languages", "Languages", "{BD8E6B67-68D9-4669-B470-C5111DB29B46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAPI.CodeGenerator.Language.CSharp", "OpenAPI.CodeGenerator.Language.CSharp\OpenAPI.CodeGenerator.Language.CSharp.csproj", "{72E7633B-D2F6-4BBA-AA92-D2A2BCC6F2D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F36B5D21-1BC3-4F98-9EA1-A741A6E729F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F36B5D21-1BC3-4F98-9EA1-A741A6E729F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F36B5D21-1BC3-4F98-9EA1-A741A6E729F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F36B5D21-1BC3-4F98-9EA1-A741A6E729F1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE63261F-7C6C-435D-8442-63B69B8FF8F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE63261F-7C6C-435D-8442-63B69B8FF8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE63261F-7C6C-435D-8442-63B69B8FF8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,17 +41,43 @@ Global
 		{1227FD7D-B017-4D11-8B01-38A8A23A2E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1227FD7D-B017-4D11-8B01-38A8A23A2E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1227FD7D-B017-4D11-8B01-38A8A23A2E73}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89E59D11-59F5-44BC-8ED1-B54DAF38642A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89E59D11-59F5-44BC-8ED1-B54DAF38642A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89E59D11-59F5-44BC-8ED1-B54DAF38642A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89E59D11-59F5-44BC-8ED1-B54DAF38642A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60C7577B-763B-435C-AD79-F265EB50B4C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60C7577B-763B-435C-AD79-F265EB50B4C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60C7577B-763B-435C-AD79-F265EB50B4C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60C7577B-763B-435C-AD79-F265EB50B4C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A7BC279-BBB0-474A-AEA6-BF6F90882CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A7BC279-BBB0-474A-AEA6-BF6F90882CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A7BC279-BBB0-474A-AEA6-BF6F90882CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A7BC279-BBB0-474A-AEA6-BF6F90882CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B058AA-15C7-4D6B-A3D5-D939F948C62A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B058AA-15C7-4D6B-A3D5-D939F948C62A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B058AA-15C7-4D6B-A3D5-D939F948C62A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B058AA-15C7-4D6B-A3D5-D939F948C62A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D91D738-1375-4845-8EBA-8C41140F3EA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D91D738-1375-4845-8EBA-8C41140F3EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D91D738-1375-4845-8EBA-8C41140F3EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D91D738-1375-4845-8EBA-8C41140F3EA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F72A461D-067A-40CD-BEBB-FC52E42B1657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F72A461D-067A-40CD-BEBB-FC52E42B1657}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F72A461D-067A-40CD-BEBB-FC52E42B1657}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F72A461D-067A-40CD-BEBB-FC52E42B1657}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB26C5E3-649A-4E2E-B55E-0F6495577398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB26C5E3-649A-4E2E-B55E-0F6495577398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB26C5E3-649A-4E2E-B55E-0F6495577398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB26C5E3-649A-4E2E-B55E-0F6495577398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E7633B-D2F6-4BBA-AA92-D2A2BCC6F2D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E7633B-D2F6-4BBA-AA92-D2A2BCC6F2D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E7633B-D2F6-4BBA-AA92-D2A2BCC6F2D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E7633B-D2F6-4BBA-AA92-D2A2BCC6F2D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EE63261F-7C6C-435D-8442-63B69B8FF8F2} = {A88966AB-3D3E-45D0-8E3F-11775B64BC71}
+		{1227FD7D-B017-4D11-8B01-38A8A23A2E73} = {ACD22724-337D-4DC5-85B3-0555A64935D2}
+		{0A7BC279-BBB0-474A-AEA6-BF6F90882CF5} = {1BC6F92F-5254-40F8-A090-A84039C3FC85}
+		{11B058AA-15C7-4D6B-A3D5-D939F948C62A} = {1BC6F92F-5254-40F8-A090-A84039C3FC85}
+		{1D91D738-1375-4845-8EBA-8C41140F3EA8} = {1BC6F92F-5254-40F8-A090-A84039C3FC85}
+		{F72A461D-067A-40CD-BEBB-FC52E42B1657} = {1BC6F92F-5254-40F8-A090-A84039C3FC85}
+		{AB26C5E3-649A-4E2E-B55E-0F6495577398} = {1BC6F92F-5254-40F8-A090-A84039C3FC85}
+		{72E7633B-D2F6-4BBA-AA92-D2A2BCC6F2D8} = {BD8E6B67-68D9-4669-B470-C5111DB29B46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF97E57F-AB23-4EF2-9CE5-191B57302230}

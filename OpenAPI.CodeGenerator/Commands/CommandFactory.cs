@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenAPI.CodeGenerator.Commands.Generate;
+using OpenAPI.CodeGenerator.Commands.ListRenderEngines;
 using OpenAPI.CodeGenerator.Commands.ListTemplates;
 
 namespace OpenAPI.CodeGenerator.Commands
@@ -15,6 +16,9 @@ namespace OpenAPI.CodeGenerator.Commands
 
                 case CommandType.ListTemplates:
                     return new ListTemplatesCommand(args);
+
+                case CommandType.ListRengerEngines:
+                    return new ListRenderEnginesCommand(args);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(commandType), $"Invalid or unsupported {nameof(CommandType)}: {commandType.ToString()}");

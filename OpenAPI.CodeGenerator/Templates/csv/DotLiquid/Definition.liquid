@@ -1,0 +1,16 @@
+﻿FileName,BestControllerName,Host,BasePath,FileTagName,FileTagDescription,Path,Action,ActionTagName,ActionTagDescription
+{% for pathItem in OpenApiDocument.Paths -%}
+P: {{ pathItem.Key }}
+{% assign operationLastIndex = pathItem.Value.Operations.size | minus:1 %}
+Z: {{ operationLastIndex }}
+
+{% for operationItemKey in pathItem.Value.Operations.Keys -%}
+Key: {{ operationItemKey }}
+{% endfor -%}
+
+{% for operationItemIndex in (0..operationLastIndex) -%}
+OK: {{ operationItemIndex }}
+{% assign operationItem = pathItem.Value.Operations[operationItemIndex] %}
+{{ operationItem.Summary }}
+{% endfor -%}
+{% endfor -%}

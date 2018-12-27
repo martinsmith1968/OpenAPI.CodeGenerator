@@ -14,7 +14,7 @@ namespace OpenAPI.CodeGenerator.OutputWriters
                 case OutputTargetType.Console:
                     return new ConsoleOutputWriter();
 
-                case OutputTargetType.Files:
+                case OutputTargetType.Filesystem:
                     return new FileSystemOutputWriter();
 
                 default:

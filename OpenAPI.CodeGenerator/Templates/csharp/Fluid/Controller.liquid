@@ -1,0 +1,12 @@
+﻿namespace MyStuff.Crap
+{
+{% for pathItem in OpenApiPathItem -%}
+    [Route("{{ pathItem.Key }}")]
+    public {{ Name }}Controller : ApiController
+    {
+{% for operation in pathItem.Value.Operations -%}
+{% include "Action" %}
+{% endfor -%}
+{% endfor -%}
+    }
+}
