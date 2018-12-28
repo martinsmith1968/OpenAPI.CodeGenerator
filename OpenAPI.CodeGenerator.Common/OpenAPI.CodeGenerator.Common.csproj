@@ -10,4 +10,7 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DNX.Helpers" Version="1.0.26" />
+  </ItemGroup>
 </Project>
