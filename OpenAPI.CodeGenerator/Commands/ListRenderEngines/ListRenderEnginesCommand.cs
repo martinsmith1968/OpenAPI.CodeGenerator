@@ -12,18 +12,17 @@ namespace OpenAPI.CodeGenerator.Commands.ListRenderEngines
 
         public void Execute()
         {
+            var index = 0;
             var renderEngines = Enum.GetNames(typeof(RenderEngineType))
-                                    .OrderBy(n => n)
-                                    .ToArray();
+                .OrderBy(n => n)
+                .ToDictionary(x => ++index, x => x);
 
             var indexSize = renderEngines.Count().ToString().Length;
 
             Console.WriteLine("Render Engines:");
-
-            var index = 0;
             foreach (var renderEngine in renderEngines)
             {
-                Console.WriteLine(string.Format("{0," + indexSize + "}: {1}", ++index, renderEngine));
+                Console.WriteLine(string.Format("{0," + indexSize + "}: {1}", renderEngine.Key, renderEngine.Value));
             }
         }
     }

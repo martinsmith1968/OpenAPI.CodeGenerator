@@ -53,4 +53,8 @@
     <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.Scriban\OpenAPI.CodeGenerator.RenderEngine.Scriban.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\ExportTemplates\" />
+    <Folder Include="Attributes\" />
+  </ItemGroup>
 </Project>

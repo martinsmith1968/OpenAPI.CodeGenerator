@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenAPI.CodeGenerator.Commands.Generate;
 using OpenAPI.CodeGenerator.Commands.ListRenderEngines;
-using OpenAPI.CodeGenerator.Commands.ListTemplates;
+using OpenAPI.CodeGenerator.Commands.ListLanguages;
 
 namespace OpenAPI.CodeGenerator.Commands
 {
@@ -14,10 +14,10 @@ namespace OpenAPI.CodeGenerator.Commands
                 case CommandType.Generate:
                     return new GenerateCommand(args);
 
-                case CommandType.ListTemplates:
-                    return new ListTemplatesCommand(args);
+                case CommandType.ListLanguages:
+                    return new ListLanguagesCommand(args);
 
-                case CommandType.ListRengerEngines:
+                case CommandType.ListRenderEngines:
                     return new ListRenderEnginesCommand(args);
 
                 default:

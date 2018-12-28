@@ -4,9 +4,9 @@
     {
         Generate = 1,
 
-        ListTemplates,
+        ListLanguages,
 
-        ListRengerEngines,
+        ListRenderEngines,
 
         ExportEmbeddedTemplates
     }
