@@ -3,7 +3,7 @@ using Liquid.NET.Utils;
 using OpenAPI.CodeGenerator.Common.Constants;
 using OpenAPI.CodeGenerator.Common.RenderEngines;
 
-namespace OpenAPI.CodeGenerator.Renderer.LiquidNET
+namespace OpenAPI.CodeGenerator.RenderEngine.LiquidNET
 {
     public class LiquidNETRenderEngine : BaseRenderEngine
     {

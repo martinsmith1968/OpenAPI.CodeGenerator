@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.FileProviders;
 using OpenAPI.CodeGenerator.Common.Types;
 
-namespace OpenAPI.CodeGenerator.Renderer.Fluid.FileProviders
+namespace OpenAPI.CodeGenerator.RenderEngine.Fluid.FileProviders
 {
     public class FileProviderFactory
     {

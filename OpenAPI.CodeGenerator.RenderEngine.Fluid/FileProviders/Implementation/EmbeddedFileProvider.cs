@@ -2,7 +2,7 @@
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 
-namespace OpenAPI.CodeGenerator.Renderer.Fluid.FileProviders.Implementation
+namespace OpenAPI.CodeGenerator.RenderEngine.Fluid.FileProviders.Implementation
 {
     public class EmbeddedFileProvider : IFileProvider
     {

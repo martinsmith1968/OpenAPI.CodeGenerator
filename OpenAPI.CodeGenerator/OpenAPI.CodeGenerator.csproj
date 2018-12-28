@@ -47,11 +47,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenAPI.CodeGenerator.Common\OpenAPI.CodeGenerator.Common.csproj" />
-    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.DotLiquid\OpenAPI.CodeGenerator.Renderer.DotLiquid.csproj" />
-    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.Fluid\OpenAPI.CodeGenerator.Renderer.Fluid.csproj" />
-    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.LiquidNET\OpenAPI.CodeGenerator.Renderer.LiquidNET.csproj" />
-    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.Razor\OpenAPI.CodeGenerator.Renderer.Razor.csproj" />
-    <ProjectReference Include="..\OpenAPI.CodeGenerator.Renderer.Scriban\OpenAPI.CodeGenerator.Renderer.Scriban.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.Language.CSharp\OpenAPI.CodeGenerator.Language.CSharp.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.Language.CSV\OpenAPI.CodeGenerator.Language.CSV.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.DotLiquid\OpenAPI.CodeGenerator.RenderEngine.DotLiquid.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.Fluid\OpenAPI.CodeGenerator.RenderEngine.Fluid.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.LiquidNET\OpenAPI.CodeGenerator.RenderEngine.LiquidNET.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.Razor\OpenAPI.CodeGenerator.RenderEngine.Razor.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.Scriban\OpenAPI.CodeGenerator.RenderEngine.Scriban.csproj" />
   </ItemGroup>
 
 </Project>

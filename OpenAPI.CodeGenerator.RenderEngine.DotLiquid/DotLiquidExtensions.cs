@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DotLiquid;
 
-namespace OpenAPI.CodeGenerator.Renderer.DotLiquid
+namespace OpenAPI.CodeGenerator.RenderEngine.DotLiquid
 {
     public static class DotLiquidExtensions
     {

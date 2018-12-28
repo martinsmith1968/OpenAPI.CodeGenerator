@@ -1,7 +1,7 @@
 ﻿using OpenAPI.CodeGenerator.Common.RenderEngines;
 using Scriban;
 
-namespace OpenAPI.CodeGenerator.Renderer.Scriban
+namespace OpenAPI.CodeGenerator.RenderEngine.Scriban
 {
     public class ScribanRenderEngine : BaseRenderEngine
     {

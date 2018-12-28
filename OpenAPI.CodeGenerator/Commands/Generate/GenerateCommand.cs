@@ -40,7 +40,7 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
 
         public void Execute()
         {
-            _renderEngine.InitialiseIncludes(_arguments.TemplateProvider, _templateProvider, _language.TemplateFolderName);
+            _renderEngine.InitialiseIncludes(_arguments.TemplateProvider, _templateProvider, _language);
 
             var internalTypes = typeof(APIController).Assembly.GetTypes()
                 .Where(t => (t.FullName ?? string.Empty).StartsWith(typeof(APIController).Namespace))
@@ -71,7 +71,7 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
             {
                 _outputWriter.InitialiseFile(fileName);
 
-                var template = _templateProvider.GetTemplate(_renderEngine, _language.TemplateFolderName, TemplateItemType.Definition);
+                var template = _templateProvider.GetTemplate(_renderEngine, _language, TemplateItemType.Definition);
 
                 var output = _renderEngine.RenderTemplate(template, definition);
 
@@ -93,7 +93,7 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
 
             _outputWriter.InitialiseFile(fileName);
 
-            var template = _templateProvider.GetTemplate(_renderEngine, _language.TemplateFolderName, TemplateItemType.Controller);
+            var template = _templateProvider.GetTemplate(_renderEngine, _language, TemplateItemType.Controller);
 
             var output = _renderEngine.RenderTemplate(template, controller);
 
@@ -113,7 +113,7 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
             if (string.IsNullOrEmpty(fileName))
                 return;
 
-            var template = _templateProvider.GetTemplate(_renderEngine, _language.TemplateFolderName, TemplateItemType.Action);
+            var template = _templateProvider.GetTemplate(_renderEngine, _language, TemplateItemType.Action);
 
             var output = _renderEngine.RenderTemplate(template, action);
 

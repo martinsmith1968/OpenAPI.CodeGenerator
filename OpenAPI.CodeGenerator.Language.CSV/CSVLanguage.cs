@@ -1,7 +1,7 @@
 ﻿using OpenAPI.CodeGenerator.Common.Languages;
 using OpenAPI.CodeGenerator.Common.Types;
 
-namespace OpenAPI.CodeGenerator.Languages.Implementation
+namespace OpenAPI.CodeGenerator.Language.CSV
 {
     public class CSVLanguage : BaseLanguage
     {

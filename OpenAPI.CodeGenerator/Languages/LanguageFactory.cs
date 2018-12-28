@@ -1,7 +1,8 @@
 ﻿using System;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
-using OpenAPI.CodeGenerator.Languages.Implementation;
+using OpenAPI.CodeGenerator.Language.CSharp;
+using OpenAPI.CodeGenerator.Language.CSV;
 
 namespace OpenAPI.CodeGenerator.Languages
 {

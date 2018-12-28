@@ -2,29 +2,8 @@
 using OpenAPI.CodeGenerator.Common.Languages;
 using OpenAPI.CodeGenerator.Common.Types;
 
-namespace OpenAPI.CodeGenerator.Languages.Implementation
+namespace OpenAPI.CodeGenerator.Language.CSharp
 {
-    public class CSharpOptions
-    {
-        public enum CSharpOutputType
-        {
-            SingleFile,
-            FilePerClass
-        }
-
-        public CSharpOutputType OutputType { get; private set; }
-
-        public static CSharpOptions Create(string[] optionsArgs)
-        {
-            var options = new CSharpOptions()
-            {
-                OutputType = CSharpOutputType.SingleFile
-            };
-
-            return options;
-        }
-    }
-
     public class CSharpLanguage : BaseLanguage
     {
         private CSharpOptions _options;
@@ -38,23 +17,20 @@ namespace OpenAPI.CodeGenerator.Languages.Implementation
 
         public override string BuildOutputFileName(string itemName, TemplateItemType templateItemType)
         {
-            return BuildSingleOtputFileName(itemName, templateItemType);
-            /*
-            switch (outputType)
+            switch(_options.OutputType)
             {
-                case OutputType.SingleFile:
-                    return BuildSingleOtputFileName(itemName, templateItemType);
+                case CSharpOptions.CSharpOutputType.SingleFile:
+                    return BuildSingleOutputFileName(itemName, templateItemType);
 
-                case OutputType.MultipleFiles:
-                    return BuildMutipleOutputFileName(itemName, templateItemType);
+                case CSharpOptions.CSharpOutputType.FilePerClass:
+                    return BuildMultipleOutputFileName(itemName, templateItemType);
 
                 default:
                     return null;
             }
-            */
         }
 
-        private string BuildMutipleOutputFileName(string itemName, TemplateItemType templateItemType)
+        private string BuildMultipleOutputFileName(string itemName, TemplateItemType templateItemType)
         {
             var subFolder = Pluralize(templateItemType.ToString());
 
@@ -74,7 +50,7 @@ namespace OpenAPI.CodeGenerator.Languages.Implementation
             }
         }
 
-        private string BuildSingleOtputFileName(string itemName, TemplateItemType templateItemType)
+        private string BuildSingleOutputFileName(string itemName, TemplateItemType templateItemType)
         {
             switch (templateItemType)
             {

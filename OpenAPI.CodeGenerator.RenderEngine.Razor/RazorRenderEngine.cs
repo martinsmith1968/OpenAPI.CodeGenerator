@@ -5,14 +5,13 @@ using RazorEngine;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 
-namespace OpenAPI.CodeGenerator.Renderer.Razor
+namespace OpenAPI.CodeGenerator.RenderEngine.Razor
 {
     public class RazorRenderEngine : BaseRenderEngine
     {
         public override string FileExtension => "cshtml";
 
-        public override void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider,
-            string languageFolder)
+        public override void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, ILanguage language)
         {
             var config = new TemplateServiceConfiguration();
             config.CachingProvider = new DefaultCachingProvider(t => { });

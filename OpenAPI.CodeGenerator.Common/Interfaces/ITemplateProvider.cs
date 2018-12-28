@@ -9,9 +9,9 @@ namespace OpenAPI.CodeGenerator.Common.Interfaces
 
         IList<string> GetAvailableLanguages();
 
-        string GetTemplatePath(IRenderEngine renderEngine, string language);
+        string GetTemplatePath(IRenderEngine renderEngine, ILanguage language);
 
-        string GetTemplate(IRenderEngine renderEngine, string languageFolder, TemplateItemType templateItemType);
+        string GetTemplate(IRenderEngine renderEngine, ILanguage language, TemplateItemType templateItemType);
 
         bool DoesTemplateExist(string fullTemplateName);
     }

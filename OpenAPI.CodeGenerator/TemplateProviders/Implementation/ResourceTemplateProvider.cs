@@ -34,6 +34,21 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
             return paths;
         }
 
+        public string GetTemplatePath(IRenderEngine renderEngine, ILanguage language)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string GetTemplate(IRenderEngine renderEngine, ILanguage language, TemplateItemType templateItemType)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool DoesTemplateExist(IRenderEngine renderEngine, ILanguage language, string templateName)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public string GetTemplatePath(IRenderEngine renderEngine, string language)
         {
             var path = Combine(BaseLocation, language, renderEngine.Name);

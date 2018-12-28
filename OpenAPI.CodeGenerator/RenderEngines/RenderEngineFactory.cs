@@ -1,10 +1,11 @@
 ﻿using System;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
-using OpenAPI.CodeGenerator.Renderer.DotLiquid;
-using OpenAPI.CodeGenerator.Renderer.Fluid;
-using OpenAPI.CodeGenerator.Renderer.Razor;
-using OpenAPI.CodeGenerator.Renderer.Scriban;
+using OpenAPI.CodeGenerator.RenderEngine.DotLiquid;
+using OpenAPI.CodeGenerator.RenderEngine.Fluid;
+using OpenAPI.CodeGenerator.RenderEngine.LiquidNET;
+using OpenAPI.CodeGenerator.RenderEngine.Razor;
+using OpenAPI.CodeGenerator.RenderEngine.Scriban;
 
 namespace OpenAPI.CodeGenerator.RenderEngines
 {

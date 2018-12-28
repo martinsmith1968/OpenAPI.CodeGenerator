@@ -7,15 +7,15 @@ using OpenAPI.CodeGenerator.Common.Constants;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.RenderEngines;
 using OpenAPI.CodeGenerator.Common.Types;
-using OpenAPI.CodeGenerator.Renderer.DotLiquid.FileSystemProviders;
+using OpenAPI.CodeGenerator.RenderEngine.DotLiquid.FileSystemProviders;
 
-namespace OpenAPI.CodeGenerator.Renderer.DotLiquid
+namespace OpenAPI.CodeGenerator.RenderEngine.DotLiquid
 {
     public class DotLiquidRenderEngine : BaseRenderEngine
     {
-        public override void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, string languageFolder)
+        public override void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, ILanguage language)
         {
-            Template.FileSystem = FileSystemProviderFactory.GetFileSystemProvider(templateProviderType, templateProvider.GetTemplatePath(this, languageFolder));
+            Template.FileSystem = FileSystemProviderFactory.GetFileSystemProvider(templateProviderType, templateProvider.GetTemplatePath(this, language));
         }
 
         public override void RegisterType(Type type)

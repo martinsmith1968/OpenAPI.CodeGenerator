@@ -2,7 +2,7 @@
 using DotLiquid.FileSystems;
 using OpenAPI.CodeGenerator.Common.Types;
 
-namespace OpenAPI.CodeGenerator.Renderer.DotLiquid.FileSystemProviders
+namespace OpenAPI.CodeGenerator.RenderEngine.DotLiquid.FileSystemProviders
 {
     public class FileSystemProviderFactory
     {
