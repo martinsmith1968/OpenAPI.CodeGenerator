@@ -8,9 +8,9 @@ namespace OpenAPI.CodeGenerator.Languages
 {
     public static class LanguageFactory
     {
-        public static ILanguage GetLanguage(LanguageType languageType, string languageOptions)
+        public static ILanguage GetLanguageAndConfigure(LanguageType languageType, string languageOptions)
         {
-            var language = CreateLanguage(languageType);
+            var language = GetLanguage(languageType);
             if (language != null)
             {
                 var languageOptionsArray = (languageOptions ?? string.Empty).Split(" ".ToCharArray());
@@ -21,7 +21,7 @@ namespace OpenAPI.CodeGenerator.Languages
             return language;
         }
 
-        private static ILanguage CreateLanguage(LanguageType languageType)
+        private static ILanguage GetLanguage(LanguageType languageType)
         {
             switch (languageType)
             {

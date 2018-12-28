@@ -31,7 +31,7 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
         {
             _arguments = args.ParseArguments<Arguments>(out _parser);
 
-            _language         = LanguageFactory.GetLanguage(_arguments.Language, _arguments.LanguageOptions);
+            _language         = LanguageFactory.GetLanguageAndConfigure(_arguments.Language, _arguments.LanguageOptions);
             _renderEngine     = RenderEngineFactory.GetRenderEngine(_arguments.RenderEngine);
             _templateProvider = TemplateProviderFactory.GetTemplateProvider(_arguments.TemplateProvider);
             _outputWriter     = OutputWriterFactory.GetOutputWriter(_arguments.OutputTarget);
