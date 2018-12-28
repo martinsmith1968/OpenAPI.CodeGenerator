@@ -18,17 +18,14 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Templates\csharp\DotLiquid\Controller.liquid">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Templates\csharp\DotLiquid\_Action.liquid" />
     <EmbeddedResource Include="Templates\csharp\Fluid\Controller.liquid">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Templates\csharp\Fluid\_Action.liquid" />
     <EmbeddedResource Include="Templates\csharp\LiquidNET\Controller.template" />
     <EmbeddedResource Include="Templates\csharp\LiquidNET\_Action.template" />
     <EmbeddedResource Include="Templates\csharp\Scriban\Controller.liquid">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Templates\csharp\Scriban\_Action.liquid" />
     <EmbeddedResource Include="Templates\csv\Fluid\Definition.liquid" />
