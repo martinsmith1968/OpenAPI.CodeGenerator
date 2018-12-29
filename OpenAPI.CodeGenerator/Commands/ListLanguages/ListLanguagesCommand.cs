@@ -27,7 +27,7 @@ namespace OpenAPI.CodeGenerator.Commands.ListLanguages
         {
         }
 
-        public ListTemplatesCommand(ITemplateProviderFactory templateProviderFactory)
+        public ListLanguagesCommand(ITemplateProviderFactory templateProviderFactory)
         {
             _templateProviderFactory = templateProviderFactory;
         }

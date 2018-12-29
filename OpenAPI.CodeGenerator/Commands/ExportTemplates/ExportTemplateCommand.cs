@@ -1,9 +1,12 @@
-﻿using System;
-namespace OpenAPI.CodeGenerator.Commands.ExportTemplates
+﻿namespace OpenAPI.CodeGenerator.Commands.ExportTemplates
 {
     public class ExportTemplateCommand : ICommand
     {
         public ExportTemplateCommand()
+        {
+        }
+
+        public void SetArguments(string[] args)
         {
         }
 
