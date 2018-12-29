@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq;
 using Ookii.CommandLine;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
 using OpenAPI.CodeGenerator.Parser;
 using OpenAPI.CodeGenerator.TemplateProviders;
 
-namespace OpenAPI.CodeGenerator.Commands.ListTemplates
+namespace OpenAPI.CodeGenerator.Commands.ListLanguages
 {
     public class Arguments
     {
@@ -13,13 +14,13 @@ namespace OpenAPI.CodeGenerator.Commands.ListTemplates
         public TemplateProviderType TemplateProvider { get; set; }
     }
 
-    public class ListTemplatesCommand : ICommand
+    public class ListLanguagesCommand : ICommand
     {
         private readonly CommandLineParser _parser;
         private readonly Arguments _arguments;
         private readonly ITemplateProvider _templateProvider;
 
-        public ListTemplatesCommand(string[] args)
+        public ListLanguagesCommand(string[] args)
         {
             _arguments = args.ParseArguments<Arguments>(out _parser);
 
@@ -28,12 +29,17 @@ namespace OpenAPI.CodeGenerator.Commands.ListTemplates
 
         public void Execute()
         {
-            var languages = _templateProvider.GetAvailableLanguages();
+            var index = 0;
+            var languages = _templateProvider.GetAvailableLanguages()
+                .OrderBy(n => n)
+                .ToDictionary(x => ++index, x => x);
+
+            var indexSize = languages.Count().ToString().Length;
 
             Console.WriteLine("Languages:");
             foreach (var language in languages)
             {
-                Console.WriteLine($"  {language}");
+                Console.WriteLine(string.Format("{0," + indexSize + "}: {1}", language.Key, language.Value));
             }
         }
     }
