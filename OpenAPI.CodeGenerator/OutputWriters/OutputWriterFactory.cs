@@ -1,25 +1,20 @@
 ﻿using System;
+using Autofac;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
-using OpenAPI.CodeGenerator.OutputWriters.Implementation;
+using OpenAPI.CodeGenerator.Interfaces;
 
 namespace OpenAPI.CodeGenerator.OutputWriters
 {
-    public class OutputWriterFactory
+    public class OutputWriterFactory : IOutputWriterFactory
     {
-        public static IOutputWriter GetOutputWriter(OutputTargetType outputTargetType)
+        public IOutputWriter GetOutputWriter(OutputTargetType outputTargetType)
         {
-            switch (outputTargetType)
-            {
-                case OutputTargetType.Console:
-                    return new ConsoleOutputWriter();
+            var outputWriter = Program.Container.ResolveOptionalKeyed<IOutputWriter>(outputTargetType);
+            if (outputWriter == null)
+                throw new ArgumentOutOfRangeException(nameof(outputTargetType), $"Invalid or unsupported {nameof(OutputTargetType)}: {outputTargetType.ToString()}");
 
-                case OutputTargetType.Filesystem:
-                    return new FileSystemOutputWriter();
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(outputTargetType), $"Invalid or unsupported {nameof(OutputTargetType)}: {outputTargetType.ToString()}");
-            }
+            return outputWriter;
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
+using Autofac;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
-using OpenAPI.CodeGenerator.Language.CSharp;
-using OpenAPI.CodeGenerator.Language.CSV;
+using OpenAPI.CodeGenerator.Interfaces;
 
 namespace OpenAPI.CodeGenerator.Languages
 {
-    public static class LanguageFactory
+    public class LanguageFactory : ILanguageFactory
     {
-        public static ILanguage GetLanguageAndConfigure(LanguageType languageType, string languageOptions)
+        public ILanguage GetLanguageAndConfigure(LanguageType languageType, string languageOptions)
         {
             var language = GetLanguage(languageType);
             if (language != null)
@@ -21,19 +21,13 @@ namespace OpenAPI.CodeGenerator.Languages
             return language;
         }
 
-        private static ILanguage GetLanguage(LanguageType languageType)
+        public ILanguage GetLanguage(LanguageType languageType)
         {
-            switch (languageType)
-            {
-                case LanguageType.csharp:
-                    return new CSharpLanguage();
+            var language = Program.Container.ResolveOptionalKeyed<ILanguage>(languageType);
+            if (language == null)
+                throw new ArgumentOutOfRangeException(nameof(languageType), $"Invalid or unsupported {nameof(LanguageType)}: {languageType.ToString()}");
 
-                case LanguageType.CSV:
-                    return new CSVLanguage();
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(languageType), $"Invalid or unsupported {nameof(LanguageType)}: {languageType.ToString()}");
-            }
+            return language;
         }
     }
 }

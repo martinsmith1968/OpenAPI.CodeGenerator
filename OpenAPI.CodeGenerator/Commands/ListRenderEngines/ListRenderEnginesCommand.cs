@@ -6,7 +6,11 @@ namespace OpenAPI.CodeGenerator.Commands.ListRenderEngines
 {
     public class ListRenderEnginesCommand : ICommand
     {
-        public ListRenderEnginesCommand(string[] args)
+        public ListRenderEnginesCommand()
+        {
+        }
+
+        public void SetArguments(string[] args)
         {
         }
 

@@ -3,7 +3,8 @@ using System.Linq;
 using Ookii.CommandLine;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
-using OpenAPI.CodeGenerator.Parser;
+using OpenAPI.CodeGenerator.Extensions;
+using OpenAPI.CodeGenerator.Interfaces;
 using OpenAPI.CodeGenerator.TemplateProviders;
 
 namespace OpenAPI.CodeGenerator.Commands.ListLanguages
@@ -16,15 +17,26 @@ namespace OpenAPI.CodeGenerator.Commands.ListLanguages
 
     public class ListLanguagesCommand : ICommand
     {
-        private readonly CommandLineParser _parser;
-        private readonly Arguments _arguments;
-        private readonly ITemplateProvider _templateProvider;
+        private readonly ITemplateProviderFactory _templateProviderFactory;
+
+        private CommandLineParser _parser;
+        private Arguments _arguments;
+        private ITemplateProvider _templateProvider;
 
         public ListLanguagesCommand(string[] args)
         {
+        }
+
+        public ListTemplatesCommand(ITemplateProviderFactory templateProviderFactory)
+        {
+            _templateProviderFactory = templateProviderFactory;
+        }
+
+        public void SetArguments(string[] args)
+        {
             _arguments = args.ParseArguments<Arguments>(out _parser);
 
-            _templateProvider = TemplateProviderFactory.GetTemplateProvider(_arguments.TemplateProvider);
+            _templateProvider = _templateProviderFactory.GetTemplateProvider(_arguments.TemplateProvider);
         }
 
         public void Execute()

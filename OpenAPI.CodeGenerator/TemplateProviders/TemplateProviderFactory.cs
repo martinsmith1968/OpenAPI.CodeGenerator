@@ -1,25 +1,20 @@
 ﻿using System;
+using Autofac;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
-using OpenAPI.CodeGenerator.TemplateProviders.Implementation;
+using OpenAPI.CodeGenerator.Interfaces;
 
 namespace OpenAPI.CodeGenerator.TemplateProviders
 {
-    public static class TemplateProviderFactory
+    public class TemplateProviderFactory : ITemplateProviderFactory
     {
-        public static ITemplateProvider GetTemplateProvider(TemplateProviderType templateProviderType)
+        public ITemplateProvider GetTemplateProvider(TemplateProviderType templateProviderType)
         {
-            switch (templateProviderType)
-            {
-                case TemplateProviderType.FileSystem:
-                    return new FileSystemTemplateProvider();
+            var templateProvider = Program.Container.ResolveOptionalKeyed<ITemplateProvider>(templateProviderType);
+            if (templateProvider == null)
+                throw new ArgumentOutOfRangeException(nameof(templateProviderType), $"Invalid or unsupported {nameof(TemplateProviderType)}: {templateProviderType.ToString()}");
 
-                case TemplateProviderType.Resource:
-                    return new ResourceTemplateProvider();
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(templateProviderType), $"Invalid or unsupported {nameof(TemplateProviderType)}: {templateProviderType.ToString()}");
-            }
+            return templateProvider;
         }
     }
 }
