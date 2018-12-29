@@ -1,38 +1,20 @@
 ﻿using System;
+using Autofac;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
-using OpenAPI.CodeGenerator.RenderEngine.DotLiquid;
-using OpenAPI.CodeGenerator.RenderEngine.Fluid;
-using OpenAPI.CodeGenerator.RenderEngine.LiquidNET;
-using OpenAPI.CodeGenerator.RenderEngine.Razor;
-using OpenAPI.CodeGenerator.RenderEngine.Scriban;
+using OpenAPI.CodeGenerator.Interfaces;
 
 namespace OpenAPI.CodeGenerator.RenderEngines
 {
-    public class RenderEngineFactory
+    public class RenderEngineFactory : IRenderEngineFactory
     {
-        public static IRenderEngine GetRenderEngine(RenderEngineType rendererType)
+        public IRenderEngine GetRenderEngine(RenderEngineType rendererType)
         {
-            switch (rendererType)
-            {
-                case RenderEngineType.DotLiquid:
-                    return new DotLiquidRenderEngine();
+            var renderEngine = Program.Container.ResolveOptionalKeyed<IRenderEngine>(rendererType);
+            if (renderEngine == null)
+                throw new ArgumentOutOfRangeException(nameof(rendererType), $"Invalid or unsupported {nameof(RenderEngineType)}: {rendererType.ToString()}");
 
-                //case RenderEngineType.LiquidNET:
-                //    return new LiquidNETRenderEngine();
-
-                case RenderEngineType.Fluid:
-                    return new FluidRenderEngine();
-
-                case RenderEngineType.Scriban:
-                    return new ScribanRenderEngine();
-
-                case RenderEngineType.Razor:
-                    return new RazorRenderEngine();
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(rendererType), $"Invalid or unsupported {nameof(RenderEngineType)}: {rendererType.ToString()}");
-            }
+            return renderEngine;
         }
     }
 }

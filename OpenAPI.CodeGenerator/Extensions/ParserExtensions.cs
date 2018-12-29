@@ -1,7 +1,7 @@
 ﻿using Ookii.CommandLine;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 
-namespace OpenAPI.CodeGenerator.Parser
+namespace OpenAPI.CodeGenerator.Extensions
 {
     public static class ParserExtensions
     {

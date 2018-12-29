@@ -5,9 +5,9 @@ using DNX.Helpers.Reflection;
 
 namespace OpenAPI.CodeGenerator.Extensions
 {
-    public class FactoryHelper
+    public static class FactoryExtensions
     {
-        public static Type[] FindLoadedTypes(Type type)
+        public static Type[] FindLoadedTypesThatInheritFrom(this Type type)
         {
             var assemblies = Assembly.GetEntryAssembly().GetReferencedAssemblies()
                 .Select(Assembly.Load)

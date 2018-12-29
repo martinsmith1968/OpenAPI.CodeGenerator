@@ -1,28 +1,21 @@
 ﻿using System;
-using OpenAPI.CodeGenerator.Commands.Generate;
-using OpenAPI.CodeGenerator.Commands.ListRenderEngines;
-using OpenAPI.CodeGenerator.Commands.ListTemplates;
+using Autofac;
+using OpenAPI.CodeGenerator.Extensions;
+using OpenAPI.CodeGenerator.Interfaces;
 
 namespace OpenAPI.CodeGenerator.Commands
 {
-    public class CommandFactory
+    public class CommandFactory : ICommandFactory
     {
-        public static ICommand GetCommand(CommandType commandType, string[] args)
+        public ICommand GetCommand(CommandType commandType, string[] args)
         {
-            switch (commandType)
-            {
-                case CommandType.Generate:
-                    return new GenerateCommand(args);
+            var command = Program.Container.ResolveOptionalKeyed<ICommand>(commandType);
+            if (command == null)
+                throw new ArgumentOutOfRangeException(nameof(commandType), $"Invalid or unsupported {nameof(CommandType)}: {commandType.ToString()}");
 
-                case CommandType.ListTemplates:
-                    return new ListTemplatesCommand(args);
+            command.SetArguments(args);
 
-                case CommandType.ListRengerEngines:
-                    return new ListRenderEnginesCommand(args);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(commandType), $"Invalid or unsupported {nameof(CommandType)}: {commandType.ToString()}");
-            }
+            return command;
         }
     }
 }
