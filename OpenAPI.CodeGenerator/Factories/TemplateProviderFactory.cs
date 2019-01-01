@@ -22,7 +22,7 @@ namespace OpenAPI.CodeGenerator.Factories
                     .SingleOrDefault(c => c.GetTemplateProviderName().Equals(templateProviderName, StringComparison.OrdinalIgnoreCase))
                 ;
             if (templateProvider == null)
-                throw new ArgumentOutOfRangeException(nameof(templateProviderName), $"Invalid or unsupported {nameof(ITemplateProvider)}: {templateProviderName}");
+                throw new ArgumentOutOfRangeException(nameof(templateProviderName), $"Invalid or unsupported {typeof(ITemplateProvider).GetNonInterfaceName()}: {templateProviderName}");
 
             return templateProvider;
         }

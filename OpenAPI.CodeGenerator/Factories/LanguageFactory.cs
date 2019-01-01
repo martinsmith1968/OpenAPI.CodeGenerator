@@ -29,10 +29,10 @@ namespace OpenAPI.CodeGenerator.Factories
         public ILanguage GetLanguageByName(string languageName)
         {
             var language = Languages
-                    .SingleOrDefault(c => c.GetLanguageName().Equals(languageName, StringComparison.OrdinalIgnoreCase))
+                    .SingleOrDefault(c => string.Equals(c.Name, languageName, StringComparison.OrdinalIgnoreCase))
                 ;
             if (language == null)
-                throw new ArgumentOutOfRangeException(nameof(languageName), $"Invalid or unsupported {nameof(ILanguage)}: {languageName}");
+                throw new ArgumentOutOfRangeException(nameof(languageName), $"Invalid or unsupported {typeof(ILanguage).GetNonInterfaceName()}: {languageName}");
 
             return language;
         }

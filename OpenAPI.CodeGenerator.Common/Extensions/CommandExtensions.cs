@@ -10,7 +10,7 @@ namespace OpenAPI.CodeGenerator.Common.Extensions
         {
             return type == null
                 ? null
-                : type.Name.RemoveEndsWith(nameof(ICommand).RemoveStartsWith("I"));
+                : type.Name.RemoveEndsWith(typeof(ICommand).GetNonInterfaceName());
         }
 
         public static string GetCommandName(this ICommand command)
