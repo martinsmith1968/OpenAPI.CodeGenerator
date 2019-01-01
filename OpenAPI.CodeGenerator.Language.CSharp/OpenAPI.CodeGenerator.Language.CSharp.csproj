@@ -6,27 +6,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Templates\DotLiquid\Controller.liquid" />
-    <None Remove="Templates\DotLiquid\_Action.liquid" />
-    <None Remove="Templates\Fluid\Controller.liquid" />
-    <None Remove="Templates\Fluid\_Action.liquid" />
-    <None Remove="Templates\LiquidNET\Controller.template" />
-    <None Remove="Templates\LiquidNET\_Action.template" />
-    <None Remove="Templates\Razor\Definition.cshtml" />
-    <None Remove="Templates\Scriban\Controller.liquid" />
-    <None Remove="Templates\Scriban\_Action.liquid" />
+    <None Remove="Templates\csharp\DotLiquid\Controller.liquid" />
+    <None Remove="Templates\csharp\DotLiquid\_Action.liquid" />
+    <None Remove="Templates\csharp\Fluid\Controller.liquid" />
+    <None Remove="Templates\csharp\Fluid\_Action.liquid" />
+    <None Remove="Templates\csharp\LiquidNET\Controller.template" />
+    <None Remove="Templates\csharp\LiquidNET\_Action.template" />
+    <None Remove="Templates\csharp\Razor\Definition.cshtml" />
+    <None Remove="Templates\csharp\Scriban\Controller.liquid" />
+    <None Remove="Templates\csharp\Scriban\_Action.liquid" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Templates\DotLiquid\Controller.liquid" />
-    <EmbeddedResource Include="Templates\DotLiquid\_Action.liquid" />
-    <EmbeddedResource Include="Templates\Fluid\Controller.liquid" />
-    <EmbeddedResource Include="Templates\Fluid\_Action.liquid" />
-    <EmbeddedResource Include="Templates\LiquidNET\Controller.template" />
-    <EmbeddedResource Include="Templates\LiquidNET\_Action.template" />
-    <EmbeddedResource Include="Templates\Razor\Definition.cshtml" />
-    <EmbeddedResource Include="Templates\Scriban\Controller.liquid" />
-    <EmbeddedResource Include="Templates\Scriban\_Action.liquid" />
+    <EmbeddedResource Include="Templates\csharp\DotLiquid\Controller.liquid" />
+    <EmbeddedResource Include="Templates\csharp\DotLiquid\_Action.liquid" />
+    <EmbeddedResource Include="Templates\csharp\Fluid\Controller.liquid" />
+    <EmbeddedResource Include="Templates\csharp\Fluid\_Action.liquid" />
+    <EmbeddedResource Include="Templates\csharp\LiquidNET\Controller.template" />
+    <EmbeddedResource Include="Templates\csharp\LiquidNET\_Action.template" />
+    <EmbeddedResource Include="Templates\csharp\Razor\Definition.cshtml" />
+    <EmbeddedResource Include="Templates\csharp\Scriban\Controller.liquid" />
+    <EmbeddedResource Include="Templates\csharp\Scriban\_Action.liquid" />
   </ItemGroup>
 
   <ItemGroup>
