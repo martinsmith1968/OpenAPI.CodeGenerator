@@ -31,10 +31,10 @@ namespace OpenAPI.CodeGenerator.Factories
         public ICommand GetCommandByName(string commandName)
         {
             var command = Commands
-                .SingleOrDefault(c => c.GetCommandName().Equals(commandName, StringComparison.OrdinalIgnoreCase))
+                .SingleOrDefault(c => string.Equals(c.Name, commandName, StringComparison.OrdinalIgnoreCase))
                 ;
             if (command == null)
-                throw new ArgumentOutOfRangeException(nameof(commandName), $"Invalid or unsupported {nameof(ICommand)}: {commandName}");
+                throw new ArgumentOutOfRangeException(nameof(commandName), $"Invalid or unsupported {typeof(ICommand).GetNonInterfaceName()}: {commandName}");
 
             return command;
         }

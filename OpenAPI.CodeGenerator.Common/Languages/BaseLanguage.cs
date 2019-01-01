@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using DNX.Helpers.Strings;
+using OpenAPI.CodeGenerator.Common.Extensions;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
 
@@ -7,9 +8,11 @@ namespace OpenAPI.CodeGenerator.Common.Languages
 {
     public abstract class BaseLanguage : ILanguage
     {
+        public virtual string Name => GetType().GetLanguageName();
+
         public abstract string FileExtension { get; }
 
-        public virtual string TemplateFolderName => GetType().Name.RemoveEndsWith("Language").ToLower();
+        public virtual string TemplateFolderName => GetType().GetLanguageName().ToLower();
 
         public virtual void ApplyArguments(string[] args)
         {

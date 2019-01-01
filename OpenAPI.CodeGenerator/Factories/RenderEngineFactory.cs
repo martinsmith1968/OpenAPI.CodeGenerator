@@ -19,10 +19,10 @@ namespace OpenAPI.CodeGenerator.Factories
         public IRenderEngine GetRenderEngineByName(string renderEngineName)
         {
             var renderEngine = RenderEngines
-                    .SingleOrDefault(c => c.GetRenderEngineName().Equals(renderEngineName, StringComparison.OrdinalIgnoreCase))
+                    .SingleOrDefault(c => string.Equals(c.Name, renderEngineName, StringComparison.OrdinalIgnoreCase))
                 ;
             if (renderEngine == null)
-                throw new ArgumentOutOfRangeException(nameof(renderEngineName), $"Invalid or unsupported {nameof(IRenderEngine)}: {renderEngineName}");
+                throw new ArgumentOutOfRangeException(nameof(renderEngineName), $"Invalid or unsupported {typeof(IRenderEngine).GetNonInterfaceName()}: {renderEngineName}");
 
             return renderEngine;
         }

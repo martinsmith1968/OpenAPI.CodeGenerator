@@ -10,7 +10,7 @@ namespace OpenAPI.CodeGenerator.Common.Extensions
         {
             return type == null
                 ? null
-                : type.Name.RemoveEndsWith(nameof(IRenderEngine).RemoveStartsWith("I"));
+                : type.Name.RemoveEndsWith(typeof(IRenderEngine).GetNonInterfaceName());
         }
 
         public static string GetRenderEngineName(this IRenderEngine renderEngine)

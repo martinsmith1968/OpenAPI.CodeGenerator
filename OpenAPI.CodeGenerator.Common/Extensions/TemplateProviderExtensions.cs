@@ -10,7 +10,7 @@ namespace OpenAPI.CodeGenerator.Common.Extensions
         {
             return type == null
                 ? null
-                : type.Name.RemoveEndsWith(nameof(ITemplateProvider).RemoveStartsWith("I"));
+                : type.Name.RemoveEndsWith(typeof(ITemplateProvider).GetNonInterfaceName());
         }
 
         public static string GetTemplateProviderName(this ITemplateProvider templateProvider)

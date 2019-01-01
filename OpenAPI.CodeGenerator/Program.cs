@@ -7,7 +7,7 @@ namespace OpenAPI.CodeGenerator
 {
     internal class Program
     {
-        public static IContainer Container { get; private set; }
+        private static IContainer Container { get; set; }
 
         private static IApplication _application;
 

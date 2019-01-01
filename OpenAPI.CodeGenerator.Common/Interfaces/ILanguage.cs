@@ -4,6 +4,8 @@ namespace OpenAPI.CodeGenerator.Common.Interfaces
 {
     public interface ILanguage
     {
+        string Name { get; }
+
         string FileExtension { get; }
 
         string TemplateFolderName { get; }

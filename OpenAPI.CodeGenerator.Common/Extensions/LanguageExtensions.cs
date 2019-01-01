@@ -10,7 +10,7 @@ namespace OpenAPI.CodeGenerator.Common.Extensions
         {
             return type == null
                 ? null
-                : type.Name.RemoveEndsWith(nameof(ILanguage).RemoveStartsWith("I"));
+                : type.Name.RemoveEndsWith(typeof(ILanguage).GetNonInterfaceName());
         }
 
         public static string GetLanguageName(this ILanguage language)

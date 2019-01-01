@@ -1,12 +1,12 @@
 ﻿using System;
+using OpenAPI.CodeGenerator.Common.Extensions;
 using OpenAPI.CodeGenerator.Common.Interfaces;
-using OpenAPI.CodeGenerator.Common.Types;
 
 namespace OpenAPI.CodeGenerator.Common.RenderEngines
 {
     public abstract class BaseRenderEngine : IRenderEngine
     {
-        public virtual string Name => GetType().Name.Replace(typeof(BaseRenderEngine).Name.Replace("Base", null), null);
+        public virtual string Name => GetType().GetRenderEngineName();
 
         public virtual string FileExtension => "liquid";
 
