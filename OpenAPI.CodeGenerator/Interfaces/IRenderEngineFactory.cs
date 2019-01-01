@@ -1,10 +1,11 @@
-﻿using OpenAPI.CodeGenerator.Common.Interfaces;
-using OpenAPI.CodeGenerator.Common.Types;
+﻿using System.Collections.Generic;
+using OpenAPI.CodeGenerator.Common.Interfaces;
 
 namespace OpenAPI.CodeGenerator.Interfaces
 {
     public interface IRenderEngineFactory
     {
-        IRenderEngine GetRenderEngine(RenderEngineType rendererType);
+        IRenderEngine GetRenderEngineByName(string rendererEngineName);
+        IEnumerable<IRenderEngine> RenderEngines { get; }
     }
 }

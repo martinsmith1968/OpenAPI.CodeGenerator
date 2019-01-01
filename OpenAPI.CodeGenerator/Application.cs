@@ -42,7 +42,7 @@ namespace OpenAPI.CodeGenerator
                     return 1;
                 }
 
-                var command = _commandFactory.GetCommand(Arguments.Command, args.Skip(1).ToArray());
+                var command = _commandFactory.GetCommandAndConfigure(Arguments.CommandName, args.Skip(1).ToArray());
 
                 command.Execute();
 

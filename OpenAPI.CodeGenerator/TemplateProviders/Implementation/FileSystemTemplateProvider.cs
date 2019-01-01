@@ -11,6 +11,8 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
     {
         public static string DefaultFileSystemTemplateFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Templates");
 
+        public TemplateProviderType TemplateProviderType => TemplateProviderType.FileSystem;
+
         public string BaseLocation { get; }
 
         public FileSystemTemplateProvider()

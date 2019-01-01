@@ -3,17 +3,17 @@ using System.Linq;
 using DNX.Helpers.Strings;
 using Microsoft.OpenApi.Models;
 using Ookii.CommandLine;
+using OpenAPI.CodeGenerator.Common.Commands;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
 using OpenAPI.CodeGenerator.Extensions;
 using OpenAPI.CodeGenerator.Interfaces;
 using OpenAPI.CodeGenerator.OpenAPI;
 using OpenAPI.CodeGenerator.OpenAPI.Items;
-using OpenAPI.CodeGenerator.OutputWriters;
 
 namespace OpenAPI.CodeGenerator.Commands.Generate
 {
-    public class GenerateCommand : ICommand
+    public class GenerateCommand : BaseCommand
     {
         private readonly ILanguageFactory _languageFactory;
         private readonly IOutputWriterFactory _outputWriterFactory;
@@ -42,21 +42,21 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
             _templateProviderFactory = templateProviderFactory;
         }
 
-        public void SetArguments(string[] args)
+        public override void SetArguments(string[] args)
         {
             _arguments = args.ParseArguments<Arguments>(out _parser);
 
             _language = _languageFactory.GetLanguageAndConfigure(_arguments.Language, _arguments.LanguageOptions);
-            _renderEngine = _renderEngineFactory.GetRenderEngine(_arguments.RenderEngine);
+            _renderEngine = _renderEngineFactory.GetRenderEngineByName(_arguments.RenderEngine);
             _templateProvider = _templateProviderFactory.GetTemplateProvider(_arguments.TemplateProvider);
             _outputWriter = _outputWriterFactory.GetOutputWriter(_arguments.OutputTarget);
 
             _document = OpenApiDocumentFactory.ReadDocumentFromFile(_arguments.OpenApiDocumentFileName);
         }
 
-        public void Execute()
+        public override void Execute()
         {
-            _renderEngine.InitialiseIncludes(_arguments.TemplateProvider, _templateProvider, _language);
+            _renderEngine.InitialiseIncludes(_templateProvider, _language);
 
             var internalTypes = typeof(APIController).Assembly.GetTypes()
                 .Where(t => (t.FullName ?? string.Empty).StartsWith(typeof(APIController).Namespace))

@@ -4,7 +4,7 @@ using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
 using OpenAPI.CodeGenerator.Interfaces;
 
-namespace OpenAPI.CodeGenerator.OutputWriters
+namespace OpenAPI.CodeGenerator.Factories
 {
     public class OutputWriterFactory : IOutputWriterFactory
     {

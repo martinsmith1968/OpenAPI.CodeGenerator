@@ -1,6 +1,5 @@
 ﻿using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.RenderEngines;
-using OpenAPI.CodeGenerator.Common.Types;
 using RazorEngine;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
@@ -11,10 +10,13 @@ namespace OpenAPI.CodeGenerator.RenderEngine.Razor
     {
         public override string FileExtension => "cshtml";
 
-        public override void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, ILanguage language)
+        public override void InitialiseIncludes(ITemplateProvider templateProvider, ILanguage language)
         {
             var config = new TemplateServiceConfiguration();
-            config.CachingProvider = new DefaultCachingProvider(t => { });
+            config.CachingProvider = new DefaultCachingProvider(t =>
+            {
+                // TODO
+            });
 
             var service = RazorEngineService.Create(config);
 

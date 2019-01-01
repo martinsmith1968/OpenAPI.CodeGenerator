@@ -12,6 +12,8 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
         public static string DefaultResourceTemplateFolder = string.Concat(typeof(Program).Namespace, ".", "Templates");
         private readonly Assembly _templateAssembly;
 
+        public TemplateProviderType TemplateProviderType => TemplateProviderType.Resource;
+
         public string BaseLocation => DefaultResourceTemplateFolder;
 
         public ResourceTemplateProvider()

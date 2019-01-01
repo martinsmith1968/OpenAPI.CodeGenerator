@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Linq;
 using Ookii.CommandLine;
+using OpenAPI.CodeGenerator.Common.Commands;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
 using OpenAPI.CodeGenerator.Extensions;
 using OpenAPI.CodeGenerator.Interfaces;
-using OpenAPI.CodeGenerator.TemplateProviders;
 
 namespace OpenAPI.CodeGenerator.Commands.ListLanguages
 {
     public class Arguments
     {
-        [CommandLineArgument(IsRequired = false, DefaultValue = TemplateProviderType.Resource)]
-        public TemplateProviderType TemplateProvider { get; set; }
+        [CommandLineArgument(IsRequired = true)]
+        public string TemplateProvider { get; set; }
     }
 
-    public class ListLanguagesCommand : ICommand
+    public class ListLanguagesCommand : BaseCommand
     {
         private readonly ITemplateProviderFactory _templateProviderFactory;
 
@@ -23,23 +23,19 @@ namespace OpenAPI.CodeGenerator.Commands.ListLanguages
         private Arguments _arguments;
         private ITemplateProvider _templateProvider;
 
-        public ListLanguagesCommand(string[] args)
-        {
-        }
-
         public ListLanguagesCommand(ITemplateProviderFactory templateProviderFactory)
         {
             _templateProviderFactory = templateProviderFactory;
         }
 
-        public void SetArguments(string[] args)
+        public override void SetArguments(string[] args)
         {
             _arguments = args.ParseArguments<Arguments>(out _parser);
 
             _templateProvider = _templateProviderFactory.GetTemplateProvider(_arguments.TemplateProvider);
         }
 
-        public void Execute()
+        public override void Execute()
         {
             var index = 0;
             var languages = _templateProvider.GetAvailableLanguages()

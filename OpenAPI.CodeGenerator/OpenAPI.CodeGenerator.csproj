@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Attributes\**" />
+    <EmbeddedResource Remove="Attributes\**" />
+    <None Remove="Attributes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Templates\csharp\Fluid\Controller.liquid" />
     <None Remove="Templates\csharp\Fluid\_Action.liquid" />
     <None Remove="Templates\csharp\Scriban\Controller.liquid" />
@@ -57,6 +63,5 @@
 
   <ItemGroup>
     <Folder Include="Commands\ExportTemplates\" />
-    <Folder Include="Attributes\" />
   </ItemGroup>
 </Project>

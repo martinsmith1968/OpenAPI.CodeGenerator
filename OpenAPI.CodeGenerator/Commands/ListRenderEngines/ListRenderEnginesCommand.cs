@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Linq;
-using OpenAPI.CodeGenerator.Common.Types;
+using OpenAPI.CodeGenerator.Common.Commands;
+using OpenAPI.CodeGenerator.Interfaces;
 
 namespace OpenAPI.CodeGenerator.Commands.ListRenderEngines
 {
-    public class ListRenderEnginesCommand : ICommand
+    public class ListRenderEnginesCommand : BaseCommand
     {
-        public ListRenderEnginesCommand()
+        private readonly IRenderEngineFactory _renderEngineFactory;
+
+        public ListRenderEnginesCommand(IRenderEngineFactory renderEngineFactory)
         {
+            _renderEngineFactory = renderEngineFactory;
         }
 
-        public void SetArguments(string[] args)
-        {
-        }
-
-        public void Execute()
+        public override void Execute()
         {
             var index = 0;
-            var renderEngines = Enum.GetNames(typeof(RenderEngineType))
-                .OrderBy(n => n)
+            var renderEngines = _renderEngineFactory.RenderEngines
+                .OrderBy(n => n.Name)
                 .ToDictionary(x => ++index, x => x);
 
             var indexSize = renderEngines.Count().ToString().Length;

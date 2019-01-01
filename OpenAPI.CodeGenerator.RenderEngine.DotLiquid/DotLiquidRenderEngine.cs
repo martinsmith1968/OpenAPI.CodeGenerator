@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DotLiquid;
-using OpenAPI.CodeGenerator.Common.Constants;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.RenderEngines;
-using OpenAPI.CodeGenerator.Common.Types;
 using OpenAPI.CodeGenerator.RenderEngine.DotLiquid.FileSystemProviders;
 
 namespace OpenAPI.CodeGenerator.RenderEngine.DotLiquid
 {
     public class DotLiquidRenderEngine : BaseRenderEngine
     {
-        public override void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, ILanguage language)
+        public override void InitialiseIncludes(ITemplateProvider templateProvider, ILanguage language)
         {
-            Template.FileSystem = FileSystemProviderFactory.GetFileSystemProvider(templateProviderType, templateProvider.GetTemplatePath(this, language));
+            Template.FileSystem = FileSystemProviderFactory.GetFileSystemProvider(templateProvider.TemplateProviderType, templateProvider.GetTemplatePath(this, language));
         }
 
         public override void RegisterType(Type type)
@@ -33,12 +30,12 @@ namespace OpenAPI.CodeGenerator.RenderEngine.DotLiquid
         {
             var template = Template.Parse(templateText);
 
+#if SHIT
             var dictionary = new Dictionary<string, object>
             {
                 { TemplateConstants.DefinitionName, Hash.FromAnonymousObject(parameters, true) }
             };
 
-#if SHIT
             var renderParameters = Hash.FromDictionary(dictionary);
 #else
             var renderParameters = Hash.FromAnonymousObject(parameters);

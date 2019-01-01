@@ -1,4 +1,4 @@
-﻿namespace OpenAPI.CodeGenerator.Commands
+﻿namespace OpenAPI.CodeGenerator.Common.Interfaces
 {
     public interface ICommand
     {

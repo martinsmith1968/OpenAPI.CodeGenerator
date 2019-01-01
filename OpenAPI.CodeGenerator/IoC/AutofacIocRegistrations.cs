@@ -1,24 +1,9 @@
-﻿using Autofac;
-using Autofac.Builder;
-using OpenAPI.CodeGenerator.Commands;
-using OpenAPI.CodeGenerator.Commands.Generate;
-using OpenAPI.CodeGenerator.Commands.ListRenderEngines;
-using OpenAPI.CodeGenerator.Commands.ListTemplates;
+﻿using System.Linq;
+using System.Reflection;
+using Autofac;
 using OpenAPI.CodeGenerator.Common.Interfaces;
-using OpenAPI.CodeGenerator.Common.Types;
+using OpenAPI.CodeGenerator.Factories;
 using OpenAPI.CodeGenerator.Interfaces;
-using OpenAPI.CodeGenerator.Language.CSharp;
-using OpenAPI.CodeGenerator.Language.CSV;
-using OpenAPI.CodeGenerator.Languages;
-using OpenAPI.CodeGenerator.OutputWriters;
-using OpenAPI.CodeGenerator.OutputWriters.Implementation;
-using OpenAPI.CodeGenerator.RenderEngine.DotLiquid;
-using OpenAPI.CodeGenerator.RenderEngine.Fluid;
-using OpenAPI.CodeGenerator.RenderEngine.Razor;
-using OpenAPI.CodeGenerator.RenderEngine.Scriban;
-using OpenAPI.CodeGenerator.RenderEngines;
-using OpenAPI.CodeGenerator.TemplateProviders;
-using OpenAPI.CodeGenerator.TemplateProviders.Implementation;
 
 namespace OpenAPI.CodeGenerator.IoC
 {
@@ -29,7 +14,7 @@ namespace OpenAPI.CodeGenerator.IoC
             var builder = new ContainerBuilder()
                     .RegisterInternal()
                     .RegisterBuiltInFactories()
-                    .RegisterBuiltInTypes()
+                    .RegisterImplementableTypes()
                 ;
 
             var container = builder.Build();
@@ -39,6 +24,7 @@ namespace OpenAPI.CodeGenerator.IoC
 
         private static ContainerBuilder RegisterInternal(this ContainerBuilder builder)
         {
+            builder.RegisterType<Application>().As<IApplication>();
 
             return builder;
         }
@@ -54,29 +40,40 @@ namespace OpenAPI.CodeGenerator.IoC
             return builder;
         }
 
-        private static ContainerBuilder RegisterBuiltInTypes(this ContainerBuilder builder)
+        private static ContainerBuilder RegisterImplementableTypes(this ContainerBuilder builder)
         {
-            builder.RegisterType<Application>().As<IApplication>();
+            var assemblies = new[]
+                {
+                    Assembly.GetEntryAssembly(),
+                    Assembly.GetExecutingAssembly()
+                }
+                .Distinct()
+                .ToArray();
 
-            builder.RegisterType<GenerateCommand>().Keyed<ICommand>(CommandType.Generate);
-            builder.RegisterType<ListTemplatesCommand>().Keyed<ICommand>(CommandType.ListTemplates);
-            builder.RegisterType<ListRenderEnginesCommand>().Keyed<ICommand>(CommandType.ListRengerEngines);
-            //builder.RegisterType<ICommand>().Keyed<GenerateCommand>(CommandType.ExportEmbeddedTemplates);
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t => typeof(ICommand).IsAssignableFrom(t))
+                .InstancePerDependency()
+                .AsImplementedInterfaces();
 
-            builder.RegisterType<CSharpLanguage>().Keyed<ILanguage>(LanguageType.csharp);
-            builder.RegisterType<CSVLanguage>().Keyed<ILanguage>(LanguageType.CSV);
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t => typeof(ILanguage).IsAssignableFrom(t))
+                .InstancePerDependency()
+                .AsImplementedInterfaces();
 
-            builder.RegisterType<ConsoleOutputWriter>().Keyed<IOutputWriter>(OutputTargetType.Console);
-            builder.RegisterType<FileSystemOutputWriter>().Keyed<IOutputWriter>(OutputTargetType.Filesystem);
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t => typeof(IOutputWriter).IsAssignableFrom(t))
+                .InstancePerDependency()
+                .AsImplementedInterfaces();
 
-            builder.RegisterType<ResourceTemplateProvider>().Keyed<ITemplateProvider>(TemplateProviderType.Resource);
-            builder.RegisterType<FileSystemTemplateProvider>().Keyed<ITemplateProvider>(TemplateProviderType.FileSystem);
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t => typeof(ITemplateProvider).IsAssignableFrom(t))
+                .InstancePerDependency()
+                .AsImplementedInterfaces();
 
-            builder.RegisterType<DotLiquidRenderEngine>().Keyed<IRenderEngine>(RenderEngineType.DotLiquid);
-            //builder.RegisterType<LiquidNETRenderEngine>().Keyed<IRenderEngine>(RenderEngineType.LiquidNET);
-            builder.RegisterType<FluidRenderEngine>().Keyed<IRenderEngine>(RenderEngineType.Fluid);
-            builder.RegisterType<ScribanRenderEngine>().Keyed<IRenderEngine>(RenderEngineType.Scriban);
-            builder.RegisterType<RazorRenderEngine>().Keyed<IRenderEngine>(RenderEngineType.Razor);
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t => typeof(IRenderEngine).IsAssignableFrom(t))
+                .InstancePerDependency()
+                .AsImplementedInterfaces();
 
             return builder;
         }
