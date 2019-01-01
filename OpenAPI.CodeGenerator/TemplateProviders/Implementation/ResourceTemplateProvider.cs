@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using OpenAPI.CodeGenerator.Common.Constants;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.Types;
 
@@ -9,36 +9,38 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
 {
     public class ResourceTemplateProvider : ITemplateProvider
     {
-        public static string DefaultResourceTemplateFolder = string.Concat(typeof(Program).Namespace, ".", "Templates");
-        private readonly Assembly _templateAssembly;
+        private readonly IEnumerable<ILanguage> _languages;
 
         public TemplateProviderType TemplateProviderType => TemplateProviderType.Resource;
 
-        public string BaseLocation => DefaultResourceTemplateFolder;
-
-        public ResourceTemplateProvider()
+        public ResourceTemplateProvider(IEnumerable<ILanguage> languages)
         {
-            _templateAssembly = Assembly.GetEntryAssembly();
+            _languages = languages;
         }
 
         public IList<string> GetAvailableLanguages()
         {
-            var resources = _templateAssembly.GetManifestResourceNames()
-                    .Where(x => x.StartsWith(BaseLocation));
-
-            var paths = resources
-                .Select(x => x.Remove(0, BaseLocation.Length + 1))
-                .Select(x => x.Split(".".ToCharArray()).FirstOrDefault())
-                .Where(x => !string.IsNullOrEmpty(x))
-                .Distinct()
+            var paths = _languages
+                .Select(GetBaseLocation)
                 .ToList();
 
             return paths;
         }
 
+        public string GetBaseLocation(ILanguage language)
+        {
+            var baseNamespace = language.GetType().Namespace;
+
+            var baseLocation = string.Concat(baseNamespace, ".", TemplateConstants.DefaultTemplatesFolder);
+
+            return baseLocation;
+        }
+
         public string GetTemplatePath(IRenderEngine renderEngine, ILanguage language)
         {
-            var path = Combine(BaseLocation, language.TemplateFolderName, renderEngine.Name);
+            var baseLocation = GetBaseLocation(language);
+
+            var path = Combine(baseLocation, language.TemplateFolderName, renderEngine.Name);
 
             return path;
         }
@@ -46,12 +48,14 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
         public string GetTemplate(IRenderEngine renderEngine, ILanguage language, TemplateItemType templateItemType)
         {
             var resourceName = Combine(GetTemplatePath(renderEngine, language), templateItemType.ToString(), renderEngine.FileExtension);
-            if (!DoesTemplateExist(resourceName))
+            if (!DoesTemplateExist(language, resourceName))
             {
                 resourceName = Combine(GetTemplatePath(renderEngine, language), string.Concat("_",  templateItemType.ToString()), renderEngine.FileExtension);
             }
 
-            using (var stream = _templateAssembly.GetManifestResourceStream(resourceName))
+            var assembly = language.GetType().Assembly;
+
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
                 if (stream == null)
                 {
@@ -67,9 +71,9 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
             }
         }
 
-        public bool DoesTemplateExist(string fullTemplateName)
+        public bool DoesTemplateExist(ILanguage language, string fullTemplateName)
         {
-            using (var stream = _templateAssembly.GetManifestResourceStream(fullTemplateName))
+            using (var stream = language.GetType().Assembly.GetManifestResourceStream(fullTemplateName))
             {
                 return stream != null;
             }
