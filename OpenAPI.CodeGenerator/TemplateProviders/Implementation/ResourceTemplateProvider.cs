@@ -12,6 +12,8 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
         public static string DefaultResourceTemplateFolder = string.Concat(typeof(Program).Namespace, ".", "Templates");
         private readonly Assembly _templateAssembly;
 
+        public TemplateProviderType TemplateProviderType => TemplateProviderType.Resource;
+
         public string BaseLocation => DefaultResourceTemplateFolder;
 
         public ResourceTemplateProvider()
@@ -36,32 +38,17 @@ namespace OpenAPI.CodeGenerator.TemplateProviders.Implementation
 
         public string GetTemplatePath(IRenderEngine renderEngine, ILanguage language)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public string GetTemplate(IRenderEngine renderEngine, ILanguage language, TemplateItemType templateItemType)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool DoesTemplateExist(IRenderEngine renderEngine, ILanguage language, string templateName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public string GetTemplatePath(IRenderEngine renderEngine, string language)
-        {
-            var path = Combine(BaseLocation, language, renderEngine.Name);
+            var path = Combine(BaseLocation, language.TemplateFolderName, renderEngine.Name);
 
             return path;
         }
 
-        public string GetTemplate(IRenderEngine renderEngine, string languageFolder, TemplateItemType templateItemType)
+        public string GetTemplate(IRenderEngine renderEngine, ILanguage language, TemplateItemType templateItemType)
         {
-            var resourceName = Combine(GetTemplatePath(renderEngine, languageFolder), templateItemType.ToString(), renderEngine.FileExtension);
+            var resourceName = Combine(GetTemplatePath(renderEngine, language), templateItemType.ToString(), renderEngine.FileExtension);
             if (!DoesTemplateExist(resourceName))
             {
-                resourceName = Combine(GetTemplatePath(renderEngine, languageFolder), string.Concat("_",  templateItemType.ToString()), renderEngine.FileExtension);
+                resourceName = Combine(GetTemplatePath(renderEngine, language), string.Concat("_",  templateItemType.ToString()), renderEngine.FileExtension);
             }
 
             using (var stream = _templateAssembly.GetManifestResourceStream(resourceName))

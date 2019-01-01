@@ -3,7 +3,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net461</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Attributes\**" />
+    <EmbeddedResource Remove="Attributes\**" />
+    <None Remove="Attributes\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Templates\csharp\Fluid\Controller.liquid" />
@@ -35,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="DNX.Helpers" Version="1.0.26" />
     <PackageReference Include="Microsoft.OpenApi" Version="1.1.2" />
     <PackageReference Include="Microsoft.OpenApi.Readers" Version="1.1.2" />
@@ -55,6 +63,5 @@
 
   <ItemGroup>
     <Folder Include="Commands\ExportTemplates\" />
-    <Folder Include="Attributes\" />
   </ItemGroup>
 </Project>

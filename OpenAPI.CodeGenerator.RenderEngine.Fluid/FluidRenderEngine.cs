@@ -3,7 +3,6 @@ using Fluid;
 using OpenAPI.CodeGenerator.Common.Constants;
 using OpenAPI.CodeGenerator.Common.Interfaces;
 using OpenAPI.CodeGenerator.Common.RenderEngines;
-using OpenAPI.CodeGenerator.Common.Types;
 using OpenAPI.CodeGenerator.RenderEngine.Fluid.FileProviders;
 
 namespace OpenAPI.CodeGenerator.RenderEngine.Fluid
@@ -22,9 +21,9 @@ namespace OpenAPI.CodeGenerator.RenderEngine.Fluid
             _templateContext.MemberAccessStrategy.Register(type);
         }
 
-        public override void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, ILanguage language)
+        public override void InitialiseIncludes(ITemplateProvider templateProvider, ILanguage language)
         {
-            _templateContext.FileProvider = FileProviderFactory.GetFileProvider(templateProviderType, templateProvider.GetTemplatePath(this, language));
+            _templateContext.FileProvider = FileProviderFactory.GetFileProvider(templateProvider.TemplateProviderType, templateProvider.GetTemplatePath(this, language));
         }
 
         public override string RenderTemplate(string templateText, object parameters)

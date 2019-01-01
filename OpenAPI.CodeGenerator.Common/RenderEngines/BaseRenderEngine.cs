@@ -10,7 +10,7 @@ namespace OpenAPI.CodeGenerator.Common.RenderEngines
 
         public virtual string FileExtension => "liquid";
 
-        public virtual void InitialiseIncludes(TemplateProviderType templateProviderType, ITemplateProvider templateProvider, ILanguage language)
+        public virtual void InitialiseIncludes(ITemplateProvider templateProvider, ILanguage language)
         {
         }
 

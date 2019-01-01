@@ -5,6 +5,8 @@ namespace OpenAPI.CodeGenerator.Common.Interfaces
 {
     public interface ITemplateProvider
     {
+        TemplateProviderType TemplateProviderType { get; }
+
         string BaseLocation { get; }
 
         IList<string> GetAvailableLanguages();

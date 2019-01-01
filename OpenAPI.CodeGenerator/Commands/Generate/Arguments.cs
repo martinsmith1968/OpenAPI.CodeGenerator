@@ -10,19 +10,19 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
         public string OpenApiDocumentFileName { get; set; }
 
         [Alias("l")]
-        [CommandLineArgument(IsRequired = false, DefaultValue = LanguageType.CSV)]
-        public LanguageType Language { get; set; }
+        [CommandLineArgument(IsRequired = true)]
+        public string Language { get; set; }
 
         [CommandLineArgument(IsRequired = false)]
         public string LanguageOptions { get; set; }
 
         [Alias("e")]
-        [CommandLineArgument(IsRequired = false, DefaultValue = RenderEngineType.DotLiquid)]
-        public RenderEngineType RenderEngine { get; set; }
+        [CommandLineArgument(IsRequired = true)]
+        public string RenderEngine { get; set; }
 
         [Alias("t")]
-        [CommandLineArgument(IsRequired = false, DefaultValue = TemplateProviderType.Resource)]
-        public TemplateProviderType TemplateProvider { get; set; }
+        [CommandLineArgument(IsRequired = true)]
+        public string TemplateProvider { get; set; }
 
         [Alias("g")]
         [CommandLineArgument(IsRequired = false)]
@@ -38,7 +38,7 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
         [CommandLineArgument(IsRequired = false, DefaultValue = false)]
         public bool Help { get; set; }
 
-        public OutputTargetType OutputTarget => string.IsNullOrEmpty(OutputLocation) ? OutputTargetType.Console : OutputTargetType.Filesystem;
+        public OutputTargetType OutputTarget => string.IsNullOrEmpty(OutputLocation) ? OutputTargetType.Console : OutputTargetType.FileSystem;
 
         public string OutputDirectory => System.IO.Path.GetDirectoryName(OutputLocation);
 
