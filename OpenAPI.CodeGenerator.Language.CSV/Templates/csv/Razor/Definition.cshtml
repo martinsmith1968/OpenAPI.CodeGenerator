@@ -1,5 +1,5 @@
 ﻿@using System.Linq
-@using OpenAPI.CodeGenerator.Extensions
+@using OpenAPI.CodeGenerator.Common.Extensions
 @model OpenAPI.CodeGenerator.OpenAPI.Items.APIDefinition
 GroupName,FileName,BestControllerName,Host,BasePath,FileTagNames,FileTagDescriptions,Path,Action,OperationId,ActionTagNames,ActionTagDescriptions,ActionSummary,ActionDescription
     @foreach (var pathItem in Model.OpenApiDocument.Paths)

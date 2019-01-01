@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenAPI.CodeGenerator.Extensions
+namespace OpenAPI.CodeGenerator.Common.Extensions
 {
     public static class EnumerableExtensions
     {
