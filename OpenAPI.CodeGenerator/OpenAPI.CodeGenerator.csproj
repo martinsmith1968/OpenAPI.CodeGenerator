@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net461</TargetFramework>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +37,7 @@
     <ProjectReference Include="..\OpenAPI.CodeGenerator.Common\OpenAPI.CodeGenerator.Common.csproj" />
     <ProjectReference Include="..\OpenAPI.CodeGenerator.Language.CSharp\OpenAPI.CodeGenerator.Language.CSharp.csproj" />
     <ProjectReference Include="..\OpenAPI.CodeGenerator.Language.CSV\OpenAPI.CodeGenerator.Language.CSV.csproj" />
+    <ProjectReference Include="..\OpenAPI.CodeGenerator.Language.JSON\OpenAPI.CodeGenerator.Language.JSON.csproj" />
     <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.DotLiquid\OpenAPI.CodeGenerator.RenderEngine.DotLiquid.csproj" />
     <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.Fluid\OpenAPI.CodeGenerator.RenderEngine.Fluid.csproj" />
     <ProjectReference Include="..\OpenAPI.CodeGenerator.RenderEngine.LiquidNET\OpenAPI.CodeGenerator.RenderEngine.LiquidNET.csproj" />

@@ -1,0 +1,4 @@
+﻿@using Newtonsoft.Json
+@using OpenAPI.CodeGenerator.Language.JSON
+@model OpenAPI.CodeGenerator.OpenAPI.Items.APIDefinition
+@Raw(JsonConvert.SerializeObject(Model, JSONLanguage.Settings.Formatting, JSONLanguage.Settings))
