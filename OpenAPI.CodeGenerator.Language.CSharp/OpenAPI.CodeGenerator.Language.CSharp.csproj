@@ -2,8 +2,32 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>x64</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Templates\csharp\DotLiquid\Controller.liquid" />
+    <None Remove="Templates\csharp\DotLiquid\_Action.liquid" />
+    <None Remove="Templates\csharp\Fluid\Controller.liquid" />
+    <None Remove="Templates\csharp\Fluid\_Action.liquid" />
+    <None Remove="Templates\csharp\LiquidNET\Controller.template" />
+    <None Remove="Templates\csharp\LiquidNET\_Action.template" />
+    <None Remove="Templates\csharp\Razor\Definition.cshtml" />
+    <None Remove="Templates\csharp\Scriban\Controller.liquid" />
+    <None Remove="Templates\csharp\Scriban\_Action.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\csharp\DotLiquid\Controller.liquid" />
+    <EmbeddedResource Include="Templates\csharp\DotLiquid\_Action.liquid" />
+    <EmbeddedResource Include="Templates\csharp\Fluid\Controller.liquid" />
+    <EmbeddedResource Include="Templates\csharp\Fluid\_Action.liquid" />
+    <EmbeddedResource Include="Templates\csharp\LiquidNET\Controller.template" />
+    <EmbeddedResource Include="Templates\csharp\LiquidNET\_Action.template" />
+    <EmbeddedResource Include="Templates\csharp\Razor\Definition.cshtml" />
+    <EmbeddedResource Include="Templates\csharp\Scriban\Controller.liquid" />
+    <EmbeddedResource Include="Templates\csharp\Scriban\_Action.liquid" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OpenAPI.CodeGenerator.Common\OpenAPI.CodeGenerator.Common.csproj" />

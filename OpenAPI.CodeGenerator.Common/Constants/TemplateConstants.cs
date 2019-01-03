@@ -2,6 +2,8 @@
 {
     public static class TemplateConstants
     {
-        public static string DefinitionName = "definition";
+        public const string DefaultTemplatesFolder = "Templates";
+
+        public const string DefinitionName = "definition";
     }
 }

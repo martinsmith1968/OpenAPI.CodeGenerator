@@ -7,14 +7,13 @@ namespace OpenAPI.CodeGenerator.Common.Interfaces
     {
         TemplateProviderType TemplateProviderType { get; }
 
-        string BaseLocation { get; }
-
         IList<string> GetAvailableLanguages();
 
+        string GetBaseLocation(ILanguage language);
         string GetTemplatePath(IRenderEngine renderEngine, ILanguage language);
 
         string GetTemplate(IRenderEngine renderEngine, ILanguage language, TemplateItemType templateItemType);
 
-        bool DoesTemplateExist(string fullTemplateName);
+        bool DoesTemplateExist(ILanguage language, string fullTemplateName);
     }
 }

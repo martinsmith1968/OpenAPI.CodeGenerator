@@ -1,0 +1,16 @@
+﻿@using System.Linq
+@using OpenAPI.CodeGenerator.Common.Extensions
+@model OpenAPI.CodeGenerator.OpenAPI.Items.APIDefinition
+
+@foreach (var pathItem in Model.OpenApiDocument.Paths)
+{
+    foreach (var operationItem in pathItem.Value.Operations)
+    {
+        <text>
+            public class </text>@Model.GroupName<text>Controller
+            {
+            }
+        </text>
+
+    }
+}
