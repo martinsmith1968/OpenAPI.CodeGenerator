@@ -1,7 +1,8 @@
 ﻿@using System.Linq
 @using OpenAPI.CodeGenerator.Common.Extensions
+@using OpenAPI.CodeGenerator.OpenAPI.Extensions
 @model OpenAPI.CodeGenerator.OpenAPI.Items.APIDefinition
-GroupName,FileName,BestControllerName,Host,BasePath,FileTagNames,FileTagDescriptions,Path,Action,OperationId,ActionTagNames,ActionTagDescriptions,ActionSummary,ActionDescription
+GroupName,FileName,DefinitionName,Host,BasePath,FileTagNames,FileTagDescriptions,Path,ControllerName,Action,OperationId,ActionTagNames,ActionTagDescriptions,ActionSummary,ActionDescription
     @foreach (var pathItem in Model.OpenApiDocument.Paths)
     {
         foreach (var operationItem in pathItem.Value.Operations)
@@ -16,6 +17,7 @@ GroupName,FileName,BestControllerName,Host,BasePath,FileTagNames,FileTagDescript
                 string.Join("|", Model.OpenApiDocument.Tags.SelectOrDefault(tags => tags.Name)),
                 string.Join("|", Model.OpenApiDocument.Tags.SelectOrDefault(tags => tags.Description)),
                 pathItem.Key,
+	            operationItem.Value.GetControllerName(),
                 operationItem.Key.ToString(),
                 operationItem.Value.OperationId,
                 string.Join("|", operationItem.Value.Tags.SelectOrDefault(tags => tags.Name)),

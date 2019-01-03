@@ -8,18 +8,18 @@ namespace OpenAPI.CodeGenerator.OpenAPI.Items
     {
         public string Name { get; private set; }
 
-        public OpenApiPaths OpenApiPathItem { get; private set; }
+        public OpenApiPaths OpenApiPaths { get; private set; }
 
         private APIController()
         {
         }
 
-        public static APIController Create(APIDefinition apiDefinition)
+        public static APIController Create(string name, OpenApiPaths paths)
         {
             return new APIController
             {
-                Name            = FindBestControllerName(apiDefinition),
-                OpenApiPathItem = apiDefinition.OpenApiDocument.Paths
+                Name         = name, //FindBestControllerName(apiDefinition),
+                OpenApiPaths = paths
             };
         }
 

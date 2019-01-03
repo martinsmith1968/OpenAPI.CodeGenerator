@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.OpenApi.Models;
+using OpenAPI.CodeGenerator.Common.Extensions;
+using OpenAPI.CodeGenerator.OpenAPI.Items;
 
 namespace OpenAPI.CodeGenerator.OpenAPI.Extensions
 {
@@ -32,6 +34,38 @@ namespace OpenAPI.CodeGenerator.OpenAPI.Extensions
             return document.GetServers()
                 .Select(s => s.GetBasePath())
                 .FirstOrDefault(s => !string.IsNullOrEmpty(s));
+        }
+
+        public static IList<APIController> GetControllers(this OpenApiDocument document)
+        {
+            if (document == null)
+                return null;
+
+            var fileTagNames = document.Tags
+                .SelectOrDefault(t => t.Name)
+                .Where(n => !string.IsNullOrEmpty(n))
+                .Distinct()
+                .ToArray();
+
+            if (fileTagNames.Any())
+            {
+                var tagControllers = fileTagNames
+                    .Select(t => APIController.Create(t, null))
+                    .ToList();
+
+                return tagControllers;
+            }
+
+            var finalPath = document.GetBasePath()
+                .Split("/".ToCharArray())
+                .Last();
+
+            var pathControllers = new []
+            {
+                APIController.Create(finalPath, document.Paths)
+            };
+
+            return pathControllers;
         }
     }
 }

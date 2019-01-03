@@ -2,15 +2,23 @@
 @using OpenAPI.CodeGenerator.Common.Extensions
 @model OpenAPI.CodeGenerator.OpenAPI.Items.APIDefinition
 
-@foreach (var pathItem in Model.OpenApiDocument.Paths)
+@foreach (var controller in Model.OpenApiDocument.GetControllers())
 {
-    foreach (var operationItem in pathItem.Value.Operations)
+<text>
+    public class </text>@controller.Name<text>Controller
     {
-        <text>
-            public class </text>@Model.GroupName<text>Controller
-            {
-            }
-        </text>
-
+</text>
+	foreach (var pathItem in controller.OpenApiPaths)
+	{
+		foreach(var operationItem in pathItem.Value.Operations)
+		{
+			<text>
+				public void </text>@operationItem.OperationId<text>Action
+				{
+				}
+			</text>
+	    }
+	<text>
     }
+</text>
 }

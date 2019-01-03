@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.OpenApi.Models;
 using OpenAPI.CodeGenerator.OpenAPI.Extensions;
 
@@ -22,11 +23,13 @@ namespace OpenAPI.CodeGenerator.OpenAPI.Items
 
         public string BasePath => OpenApiDocument.GetBasePath();
 
-        public static APIDefinition Create(string fileName, OpenApiDocument document, string groupname = null)
+        public IList<APIController> Controllers => OpenApiDocument.GetControllers();
+
+        public static APIDefinition Create(string fileName, OpenApiDocument document, string groupName = null)
         {
             return new APIDefinition
             {
-                GroupName       = groupname,
+                GroupName       = groupName,
                 FileInfo        = new FileInfo(fileName),
                 OpenApiDocument = document
             };
