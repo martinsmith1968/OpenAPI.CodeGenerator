@@ -1,5 +1,6 @@
 ﻿@using System.Linq
 @using OpenAPI.CodeGenerator.Common.Extensions
+@using OpenAPI.CodeGenerator.OpenAPI.Extensions
 @model OpenAPI.CodeGenerator.OpenAPI.Items.APIDefinition
 
 @foreach (var controller in Model.OpenApiDocument.GetControllers())
@@ -10,15 +11,16 @@
 </text>
 	foreach (var pathItem in controller.OpenApiPaths)
 	{
-		foreach(var operationItem in pathItem.Value.Operations)
+		foreach(var actionItem in pathItem.Value.GetActions())
 		{
 			<text>
-				public void </text>@operationItem.OperationId<text>Action
+				public void </text>@actionItem.GetOperationName()<text>()
 				{
 				}
 			</text>
 	    }
-	<text>
     }
-</text>
+	<text>
+	}
+	</text>
 }

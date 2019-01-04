@@ -1,31 +1,38 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using DNX.Helpers.Strings;
 using Microsoft.OpenApi.Models;
+using OpenAPI.CodeGenerator.Common.Extensions;
+using OpenAPI.CodeGenerator.OpenAPI.Extensions;
+using StringExtensions = DNX.Helpers.Strings.StringExtensions;
 
 namespace OpenAPI.CodeGenerator.OpenAPI.Items
 {
     public class APIAction
     {
-        public string Name { get; set; }
+        public OperationType OperationType { get; private set; }
 
-        public OpenApiPathItem OpenApiPathItem { get; set; }
+        public OpenApiOperation Operation { get; private set; }
 
-        public static IList<APIAction> Create(APIController controller)
+        public static APIAction Create(OperationType operationType, OpenApiOperation operation)
         {
-            var actions = controller.OpenApiPathItem
-                .Select(x => Create(x.Key, x.Value))
-                .ToArray();
+            var action = new APIAction()
+            {
+                OperationType = operationType,
+                Operation = operation
+            };
 
-            return actions;
+            return action;
         }
 
-        private static APIAction Create(string name, OpenApiPathItem pathItem)
+        public string GetOperationName(string suffix = "")
         {
-            return new APIAction()
-            {
-                Name            = name,
-                OpenApiPathItem = pathItem
-            };
+            var operationName = StringExtensions.CoalesceNullOrEmpty(
+                Operation?.OperationId.UpperCaseFirstLetter(),
+                string.Concat(OperationType.ToString().UpperCaseFirstLetter(), Operation.GetMethodName(null)),
+                "Unknown"
+            )
+                .EnsureEndsWith(suffix);
+
+            return operationName;
         }
     }
 }

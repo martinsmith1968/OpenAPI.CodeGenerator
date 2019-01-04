@@ -1,27 +1,29 @@
-﻿using System.Linq;
-using DNX.Helpers.Strings;
+﻿using DNX.Helpers.Strings;
 using Microsoft.OpenApi.Models;
+using OpenAPI.CodeGenerator.Common.Extensions;
+using StringExtensions = DNX.Helpers.Strings.StringExtensions;
 
 namespace OpenAPI.CodeGenerator.OpenAPI.Extensions
 {
     public static class OpenApiOperationExtensions
     {
-        public static string GetControllerName(this OpenApiOperation operation)
+        public static string GetMethodName(this OpenApiOperation operation, string suffix = "")
         {
-            var ownerName = operation.GetOwnerName();
+            var methodName = operation.GetOperationName()
+                .EnsureEndsWith(suffix);
 
-            return $"{ownerName}Controller";
+            return methodName;
         }
 
-        public static string GetOwnerName(this OpenApiOperation operation)
+        public static string GetOperationName(this OpenApiOperation operation)
         {
-            var ownerName = StringExtensions.CoalesceNullOrEmpty(
-                operation?.Tags?.FirstOrDefault()?.Name,
+            var operationName = StringExtensions.CoalesceNullOrEmpty(
                 operation?.OperationId,
+                string.Join("", operation?.Tags?.SelectOrDefault(t => t.Name.UpperCaseFirstLetter())),
                 "Unknown"
             );
 
-            return ownerName;
+            return operationName;
         }
     }
 }

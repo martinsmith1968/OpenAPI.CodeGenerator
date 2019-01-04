@@ -23,8 +23,6 @@ namespace OpenAPI.CodeGenerator.OpenAPI.Items
 
         public string BasePath => OpenApiDocument.GetBasePath();
 
-        public IList<APIController> Controllers => OpenApiDocument.GetControllers();
-
         public static APIDefinition Create(string fileName, OpenApiDocument document, string groupName = null)
         {
             return new APIDefinition

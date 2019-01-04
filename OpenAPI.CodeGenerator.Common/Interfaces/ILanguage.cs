@@ -12,7 +12,7 @@ namespace OpenAPI.CodeGenerator.Common.Interfaces
 
         void ApplyArguments(string[] args);
 
-        string SetOutputFileNameExtension(string fileName, bool containsExtension);
+        string GetOutputFileName(string fileLocation, bool containsExtension);
 
         string BuildOutputFileName(string itemName, TemplateItemType templateItemType);
     }

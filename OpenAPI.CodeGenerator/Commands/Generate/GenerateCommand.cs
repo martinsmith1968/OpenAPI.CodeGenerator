@@ -9,6 +9,7 @@ using OpenAPI.CodeGenerator.Common.Types;
 using OpenAPI.CodeGenerator.Extensions;
 using OpenAPI.CodeGenerator.Interfaces;
 using OpenAPI.CodeGenerator.OpenAPI;
+using OpenAPI.CodeGenerator.OpenAPI.Extensions;
 using OpenAPI.CodeGenerator.OpenAPI.Items;
 
 namespace OpenAPI.CodeGenerator.Commands.Generate
@@ -36,9 +37,9 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
             ITemplateProviderFactory templateProviderFactory
             )
         {
-            _languageFactory = languageFactory;
-            _outputWriterFactory = outputWriterFactory;
-            _renderEngineFactory = renderEngineFactory;
+            _languageFactory         = languageFactory;
+            _outputWriterFactory     = outputWriterFactory;
+            _renderEngineFactory     = renderEngineFactory;
             _templateProviderFactory = templateProviderFactory;
         }
 
@@ -46,10 +47,10 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
         {
             _arguments = args.ParseArguments<Arguments>(out _parser);
 
-            _language = _languageFactory.GetLanguageAndConfigure(_arguments.Language, _arguments.LanguageOptions);
-            _renderEngine = _renderEngineFactory.GetRenderEngineByName(_arguments.RenderEngine);
+            _language         = _languageFactory.GetLanguageAndConfigure(_arguments.Language, _arguments.LanguageOptions);
+            _renderEngine     = _renderEngineFactory.GetRenderEngineByName(_arguments.RenderEngine);
             _templateProvider = _templateProviderFactory.GetTemplateProvider(_arguments.TemplateProvider);
-            _outputWriter = _outputWriterFactory.GetOutputWriter(_arguments.OutputTarget);
+            _outputWriter     = _outputWriterFactory.GetOutputWriter(_arguments.OutputTarget);
 
             _document = OpenApiDocumentFactory.ReadDocumentFromFile(_arguments.OpenApiDocumentFileName);
         }
@@ -78,8 +79,8 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
         {
             var definitionName = StringExtensions.CoalesceNullOrEmpty(
                 _arguments.OutputLocation,
-                _language.SetOutputFileNameExtension(definition.Name, false),
-                _language.SetOutputFileNameExtension(_arguments.OpenApiDocumentFileName, true)
+                _language.GetOutputFileName(definition.Name, false),
+                _language.GetOutputFileName(_arguments.OpenApiDocumentFileName, true)
             );
 
             var fileName = _language.BuildOutputFileName(definitionName, TemplateItemType.Definition);
@@ -94,32 +95,32 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
                 _outputWriter.WriteContent(fileName, output);
             }
 
-
-
-            //var controller = APIController.Create(definition);
-            //
-            //GenerateController(controller);
+            foreach (var controller in definition.OpenApiDocument.GetControllers())
+            {
+                GenerateController(controller);
+            }
         }
 
         private void GenerateController(APIController controller)
         {
             var fileName = _language.BuildOutputFileName(controller.Name, TemplateItemType.Controller);
-            if (string.IsNullOrEmpty(fileName))
-                return;
-
-            _outputWriter.InitialiseFile(fileName);
-
-            var template = _templateProvider.GetTemplate(_renderEngine, _language, TemplateItemType.Controller);
-
-            var output = _renderEngine.RenderTemplate(template, controller);
-
-            _outputWriter.WriteContent(fileName, output);
-
-            var actions = APIAction.Create(controller);
-
-            foreach (var action in actions)
+            if (!string.IsNullOrEmpty(fileName))
             {
-                GenerateAction(action);
+                _outputWriter.InitialiseFile(fileName);
+
+                var template = _templateProvider.GetTemplate(_renderEngine, _language, TemplateItemType.Controller);
+
+                var output = _renderEngine.RenderTemplate(template, controller);
+
+                _outputWriter.WriteContent(fileName, output);
+            }
+
+            foreach (var path in controller.OpenApiPaths)
+            {
+                foreach (var action in path.Value.GetActions())
+                {
+                    GenerateAction(action);
+                }
             }
         }
 

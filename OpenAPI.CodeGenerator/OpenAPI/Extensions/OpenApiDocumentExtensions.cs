@@ -50,7 +50,7 @@ namespace OpenAPI.CodeGenerator.OpenAPI.Extensions
             if (fileTagNames.Any())
             {
                 var tagControllers = fileTagNames
-                    .Select(t => APIController.Create(t, null))
+                    .Select(t => APIController.Create(t, document.Paths.GetPathsForTag(t)))
                     .ToList();
 
                 return tagControllers;

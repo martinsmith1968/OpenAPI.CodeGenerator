@@ -18,11 +18,11 @@ namespace OpenAPI.CodeGenerator.Common.Languages
         {
         }
 
-        public virtual string SetOutputFileNameExtension(string fileName, bool containsExtension)
+        public virtual string GetOutputFileName(string fileLocation, bool containsExtension)
         {
             return containsExtension
-                ? Path.ChangeExtension(Path.GetFileNameWithoutExtension(fileName), FileExtension)
-                : Path.ChangeExtension(fileName, FileExtension);
+                ? Path.ChangeExtension(Path.GetFileNameWithoutExtension(fileLocation), FileExtension)
+                : Path.ChangeExtension(fileLocation, FileExtension);
         }
 
         public abstract string BuildOutputFileName(string itemName, TemplateItemType templateItemType);
