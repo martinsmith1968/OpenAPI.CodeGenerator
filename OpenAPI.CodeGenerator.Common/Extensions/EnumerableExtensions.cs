@@ -15,7 +15,7 @@ namespace OpenAPI.CodeGenerator.Common.Extensions
                    ?? empty;
         }
 
-        public static IList<TV> SelectOrDefault<T, TV>(this IList<T> enumerable, Func<T, TV> func)
+        public static IList<TV> SelectOrDefault<T, TV>(this IEnumerable<T> enumerable, Func<T, TV> func)
         {
             if (enumerable == null)
                 return new List<TV>();

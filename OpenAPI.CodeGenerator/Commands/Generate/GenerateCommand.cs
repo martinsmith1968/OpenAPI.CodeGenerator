@@ -95,6 +95,8 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
                 _outputWriter.WriteContent(fileName, output);
             }
 
+            return;
+
             foreach (var controller in definition.OpenApiDocument.GetControllers())
             {
                 GenerateController(controller);
@@ -126,7 +128,7 @@ namespace OpenAPI.CodeGenerator.Commands.Generate
 
         private void GenerateAction(APIAction action)
         {
-            var fileName = _language.BuildOutputFileName(action.Name, TemplateItemType.Action);
+            var fileName = _language.BuildOutputFileName(action.GetOperationName(), TemplateItemType.Action);
             if (string.IsNullOrEmpty(fileName))
                 return;
 

@@ -1,33 +1,37 @@
-﻿@using System.Linq
+﻿@using System
+@using System.Linq
 @using OpenAPI.CodeGenerator.Common.Extensions
 @using OpenAPI.CodeGenerator.OpenAPI.Extensions
 @model OpenAPI.CodeGenerator.OpenAPI.Items.APIDefinition
-GroupName,FileName,DefinitionName,Host,BasePath,FileTagNames,FileTagDescriptions,Path,ControllerName,Action,OperationId,ActionTagNames,ActionTagDescriptions,ActionSummary,ActionDescription
-    @foreach (var pathItem in Model.OpenApiDocument.Paths)
-    {
-        foreach (var operationItem in pathItem.Value.Operations)
-        {
-            var values = new string[]
-            {
-                Model.GroupName,
-                Model.FileName,
-                Model.Name,
-                Model.Host,
-                Model.BasePath,
-                string.Join("|", Model.OpenApiDocument.Tags.SelectOrDefault(tags => tags.Name)),
-                string.Join("|", Model.OpenApiDocument.Tags.SelectOrDefault(tags => tags.Description)),
-                pathItem.Key,
-	            operationItem.Value.GetControllerName(),
-                operationItem.Key.ToString(),
-                operationItem.Value.OperationId,
-                string.Join("|", operationItem.Value.Tags.SelectOrDefault(tags => tags.Name)),
-                string.Join("|", operationItem.Value.Tags.SelectOrDefault(tags => tags.Description)),
-                operationItem.Value.Summary,
-                operationItem.Value.Description
-            };
+GroupName,FileName,DefinitionName,Host,BasePath,FileTagNames,FileTagDescriptions,Path,ControllerName,Action,OperationId,OperationName,ActionTagNames,ActionTagDescriptions,ActionSummary,ActionDescription,ModelCount,ModelNames
+@foreach (var pathItem in Model.OpenApiDocument.Paths)
+{
+	foreach (var operationItem in pathItem.Value.Operations)
+	{
+		var values = new string[]
+		{
+			Model.GroupName,
+			Model.FileName,
+			Model.Name,
+			Model.Host,
+			Model.BasePath,
+			string.Join("|", Model.OpenApiDocument.Tags.SelectOrDefault(tags => tags.Name)),
+			string.Join("|", Model.OpenApiDocument.Tags.SelectOrDefault(tags => tags.Description)),
+			pathItem.Key,
+			pathItem.Value.GetControllerName(pathItem.Key),
+			operationItem.Key.ToString(),
+			operationItem.Value.OperationId,
+			operationItem.Value.GetOperationName(),
+			string.Join("|", operationItem.Value.Tags.SelectOrDefault(tags => tags.Name)),
+			string.Join("|", operationItem.Value.Tags.SelectOrDefault(tags => tags.Description)),
+			operationItem.Value.Summary,
+			operationItem.Value.Description,
+			Convert.ToString(Model.OpenApiDocument.Components.GetSchemas().Count()),
+			string.Join("|", Model.OpenApiDocument.Components.GetSchemas().Keys)
+		};
 
-            var line = string.Join(",", values);
+		var line = string.Join(",", values);
 
-<text>@line</text>
-        }
-    }
+		<text>@line</text>
+	}
+}
